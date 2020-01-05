@@ -1,0 +1,172 @@
+<!--左侧导航-->
+
+<aside class="lyear-layout-sidebar">
+
+    <!-- logo -->
+    <div id="logo" class="sidebar-header">
+        <a href="#"><img src="__IMIMG__/logo_siderbar.png" title="manage" alt="manage" /></a>
+    </div>
+    <div class="lyear-layout-sidebar-scroll">
+
+        <nav class="sidebar-main">
+            <ul class="nav nav-drawer">
+                <!--<li class="nav-item active">-->
+                    <!--<a class="multitabs" href="/admin/main">-->
+                        <!--<i class="mdi mdi-home"></i>-->
+                        <!--<span>后台首页</span>-->
+                    <!--</a>-->
+                <!--</li>-->
+               
+                <?php foreach($rabc_list  as $k=>$v){ ?>
+                <li class="nav-item nav-item-has-subnav">
+                    <a href="<?php echo $v['url'];?>" class="<?php echo $v['class']?>"  ><i class="mdi mdi-palette"></i><span><?php echo $v['menu_name']?></span></a>
+                    <ul class="nav nav-subnav">
+                        <?php foreach($v['child'] as $kk=>$vv){ ?>
+                        <li> <a class="multitabs" href="<?php echo $vv['url'];?>"><?php echo $vv['menu_name']?></a> </li>
+                        <!--<li> <a  class="multitabs" href="/finance/car_malfunction_list">代办事项</a> </li>-->
+                        <!--<li> <a  class="multitabs" href="/finance/event_list">事件详情</a> </li>-->
+                        <!--<li> <a  class="multitabs" href="/bank/bank_car_list">车辆信息</a> </li>-->
+                        <?php  } ?>
+                    </ul>
+                </li>
+                <?php } ?>
+                <!--<li class="nav-item nav-item-has-subnav">-->
+                    <!--<a href="javascript:void(0)" ><i class="mdi mdi-format-align-justify"></i> <span>个人信息</span></a>-->
+                    <!--<ul class="nav nav-subnav">-->
+                        <!--<li> <a class="multitabs" href="/user/user_list">个人资料</a> </li>-->
+                        <!--<li> <a class="multitabs" href="/finance/workbench_list">二级代理商</a> </li>-->
+                    <!--</ul>-->
+                <!--</li>-->
+
+                <!--<li class="nav-item nav-item-has-subnav">-->
+                    <!--<a href="javascript:void(0)" ><i class="mdi mdi-format-align-justify"></i> <span>用户管理</span></a>-->
+                    <!--<ul class="nav nav-subnav">-->
+
+                        <!--<li> <a class="multitabs" href="/user/user_student">学生认证</a> </li>-->
+                    <!--</ul>-->
+                <!--</li>-->
+
+                <!--<li class="nav-item nav-item-has-subnav">-->
+                    <!--<a href="javascript:void(0)" ><i class="mdi mdi-file-outline"></i><span> 电动车管理</span></a>-->
+                    <!--<ul class="nav nav-subnav">-->
+                        <!--<li> <a class="multitabs" href="/car/car_list">电动车信息</a> </li>-->
+                        <!--<li> <a class="multitabs" href="/car/report_list">故障上报</a> </li>-->
+                        <!--<li> <a class="multitabs" href="/car/promotions_list">活动</a> </li>-->
+                        <!--<li> <a class="multitabs" href="/car/malfunction">车辆区域监控</a> </li>-->
+                        <!--<li> <a class="multitabs" href="/coupon/coupon_list">远程控制电动车</a> </li>-->
+                        <!--<li> <a class="multitabs" href="/car/car_failure">还车失败</a> </li>-->
+                    <!--</ul>-->
+                <!--</li>-->
+                <!--<li class="nav-item nav-item-has-subnav">-->
+                    <!--<a href="javascript:void(0)" ><i class="mdi mdi-language-javascript"></i> <span>订单管理</span></a>-->
+                    <!--<ul class="nav nav-subnav">-->
+                        <!--<li> <a class="multitabs" href="/order/record_list">消费记录</a> </li>-->
+                        <!--&lt;!&ndash;<li> <a class="multitabs" href="/goods/goods_list">短信订单</a> </li>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<li> <a class="multitabs" href="###">补款订单</a> </li>&ndash;&gt;-->
+                        <!--<li> <a class="multitabs" href="/order/rental">长租订单</a> </li>-->
+                    <!--</ul>-->
+                <!--</li>-->
+
+
+                <!--<li class="nav-item nav-item-has-subnav">-->
+                    <!--<a href="javascript:void(0)" ><i class="mdi mdi-language-javascript"></i> <span>还车点</span></a>-->
+                    <!--<ul class="nav nav-subnav">-->
+                        <!--<li> <a class="multitabs" href="/returncar/returncar_car">还车点</a> </li>-->
+                        <!--&lt;!&ndash;<li> <a class="multitabs" href="/order/order_list">设置还车点</a> </li>&ndash;&gt;-->
+                        <!--<li> <a class="multitabs" href="/order/order_list">还车点进出</a> </li>-->
+                    <!--</ul>-->
+                <!--</li>-->
+
+                <!--<li class="nav-item nav-item-has-subnav">-->
+                    <!--<a href="javascript:void(0)" ><i class="mdi mdi-language-javascript"></i> <span>资金管理</span></a>-->
+                    <!--<ul class="nav nav-subnav">-->
+                        <!--<li> <a class="multitabs" href="/recharge/card_list">充值设置</a> </li>-->
+                        <!--<li> <a class="multitabs" href="/recharge/recharge_list">骑行卡设置</a> </li>-->
+                        <!--<li> <a class="multitabs" href="/recharge/recharge">充值明细</a> </li>-->
+                        <!--<li> <a class="multitabs" href="/recharge/car_price">骑行收费</a> </li>-->
+                        <!--<li> <a class="multitabs" href="/recharge/detail">收费明细</a> </li>-->
+                        <!--<li> <a class="multitabs" href="/recharge/setting">罚款规则</a> </li>-->
+                        <!--<li> <a class="multitabs" href="/recharge/setting_list">罚款明细</a> </li>-->
+                    <!--</ul>-->
+                <!--</li>-->
+                <!--<li class="nav-item nav-item-has-subnav">-->
+                    <!--<a href="javascript:void(0)" ><i class="mdi mdi-language-javascript"></i> <span>平台推送</span></a>-->
+                    <!--<ul class="nav nav-subnav">-->
+                        <!--<li> <a class="multitabs" href="/announcement/code_send">短信</a> </li>-->
+                        <!--<li> <a class="multitabs" href="/announcement/announcement_list">系统公告</a> </li>-->
+                    <!--</ul>-->
+                <!--</li>-->
+                <!--<li class="nav-item nav-item-has-subnav">-->
+                    <!--<a href="javascript:void(0)" ><i class="mdi mdi-language-javascript"></i> <span>超级管理员</span></a>-->
+                    <!--<ul class="nav nav-subnav">-->
+                        <!--<li> <a class="multitabs" href="/website/athou">权限</a> </li>-->
+                    <!--</ul>-->
+                <!--</li>-->
+                <!--<li class="nav-item nav-item-has-subnav">-->
+                    <!--<a href="javascript:void(0)" ><i class="mdi mdi-language-javascript"></i> <span>用户角色</span></a>-->
+                    <!--<ul class="nav nav-subnav">-->
+                        <!--<li> <a class="multitabs" href="/finance/banlance_list">用户</a> </li>-->
+                        <!--<li> <a class="multitabs" href="/finance/income">代理商</a> </li>-->
+                        <!--<li> <a class="multitabs" href="/finance/withdrawals_list">维修人员</a> </li>-->
+                    <!--</ul>-->
+                <!--</li>-->
+                <!--<li class="nav-item nav-item-has-subnav">-->
+                    <!--<a href="javascript:void(0)" ><i class="mdi mdi-language-javascript"></i> <span>客户反馈</span></a>-->
+                    <!--<ul class="nav nav-subnav">-->
+                        <!--<li> <a class="multitabs" href="/finance/banlance_list">留言反馈</a> </li>-->
+                    <!--</ul>-->
+                <!--</li>-->
+                <!--<li class="nav-item nav-item-has-subnav">-->
+                    <!--<a href="javascript:void(0)" ><i class="mdi mdi-language-javascript"></i> <span>人人代理</span></a>-->
+                    <!--<ul class="nav nav-subnav">-->
+                        <!--<li> <a class="multitabs" href="/finance/banlance_list">身份管理</a> </li>-->
+                        <!--<li> <a class="multitabs" href="/finance/income">代理资金管理</a> </li>-->
+                    <!--</ul>-->
+                <!--</li>-->
+                <!--<li class="nav-item nav-item-has-subnav">-->
+                    <!--<a href="javascript:void(0)" ><i class="mdi mdi-language-javascript"></i> <span>其他</span></a>-->
+                    <!--<ul class="nav nav-subnav">-->
+                        <!--<li> <a class="multitabs" href="/finance/banlance_list">车辆调拨</a> </li>-->
+                        <!--<li> <a class="multitabs" href="/finance/income">仓库</a> </li>-->
+                        <!--<li> <a class="multitabs" href="/finance/withdrawals_list">统计报表</a> </li>-->
+                    <!--</ul>-->
+                <!--</li>-->
+
+                <!--<li class="nav-item nav-item-has-subnav">-->
+                    <!--<a href="javascript:void(0)" ><i class="mdi mdi-menu"></i> <span>多级菜单</span></a>-->
+                    <!--<ul class="nav nav-subnav">-->
+                        <!--<li> <a href="#!">一级菜单</a> </li>-->
+                        <!--<li class="nav-item nav-item-has-subnav">-->
+                            <!--<a href="#!">一级菜单</a>-->
+                            <!--<ul class="nav nav-subnav">-->
+                                <!--<li> <a href="#!">二级菜单</a> </li>-->
+                                <!--<li class="nav-item nav-item-has-subnav">-->
+                                    <!--<a href="#!">二级菜单</a>-->
+                                    <!--<ul class="nav nav-subnav">-->
+                                        <!--<li> <a href="#!">三级菜单</a> </li>-->
+                                        <!--<li> <a href="#!">三级菜单</a> </li>-->
+                                    <!--</ul>-->
+                                <!--</li>-->
+                            <!--</ul>-->
+                        <!--</li>-->
+                        <!--<li> <a href="#!">一级菜单</a> </li>-->
+                    <!--</ul>-->
+                <!--</li>-->
+
+
+
+            </ul>
+        </nav>
+
+        <div class="sidebar-footer">
+            <p class="copyright"></p>
+        </div>
+    </div>
+
+</aside>
+
+
+
+
+
+<!--End 左侧导航-->

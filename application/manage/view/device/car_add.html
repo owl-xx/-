@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+{include file="common:header_iframe"}
+
+<div class="container-fluid p-t-15">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+
+                    <form action="/car/car_add" method="post" enctype="multipart/form-data" class="row">
+
+                        <!--手机号-->
+                        <div class="form-group col-md-12">
+                            <label for="title">车辆编码</label>
+                            <input type="text" class="form-control" id="title1" name="car_coding"
+                                   value="" placeholder="请输入车辆编码" />
+                        </div>
+                        <!--手机号end-->
+                        <div class="form-group col-md-12">
+                            <label for="title">流量卡编号</label>
+                            <input type="text" class="form-control" id="title1" name="iccid"
+                                   value="" placeholder="请输入流量卡编号" />
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="title">代理商</label>
+                        <!--<input class="form-control" type="text"  name="warn" value="" placeholder="请输入类型">-->
+                        <select class="form-control" id="" name="store_id" size="1">
+                            <option value="0">请选择</option>
+                            <?php foreach($list as $k=>$v){ ?>
+                            <option value="<?php echo $v['id']?>"><?php echo $v['name'];?></option>
+                            <?php } ?>
+                        </select>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="title">选择收费标准</label>
+                            <!--<input class="form-control" type="text"  name="warn" value="" placeholder="请输入类型">-->
+                            <select class="form-control" id="" name="car_type" size="1">
+                                <option value="0">请选择</option>
+                                <?php foreach($price as $k=>$v){ ?>
+                                <option value="<?php echo $v['car_type']?>"><?php echo $v['car_type'];?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                        <!--手机号-->
+                        <div class="form-group col-md-12">
+                            <label for="title">IMEI号码</label>
+                            <input type="text" class="form-control" id="title1" name="IMEI"
+                                   value="" placeholder="IMEI号码" />
+                        </div>
+                        <!--手机号end-->
+                        <!--<div class="form-group col-md-12">
+                            <label for="title">软件版本号</label>
+                            <input type="text" class="form-control" id="title1" name="sver"
+                                   value="" placeholder="请输入软件版本号" />
+                        </div>
+                        &lt;!&ndash;手机号&ndash;&gt;
+                        <div class="form-group col-md-12">
+                            <label for="title">硬件版本号</label>
+                            <input type="text" class="form-control" id="title1" name="hver"
+                                   value="" placeholder="请输入硬件版本号" />
+                        </div>-->
+                        <!--手机号end-->
+                        <div class="form-group col-md-12">
+                            <label for="title">地区</label>
+                            <input type="text" class="form-control" id="title1" name="city"
+                                   value="" placeholder="请输入地区" />
+                        </div>
+                        <!--手机号-->
+                        <div class="form-group col-md-12">
+                            <label for="title">可骑行多少公里</label>
+                            <input type="text" class="form-control" id="title1" name="distance"
+                                   value="" placeholder="请输入可骑行多少公里" />
+                        </div>
+                        <!--手机号end-->
+                        <div class="form-group col-md-12">
+                            <label for="title">车子里程</label>
+                            <input type="text" class="form-control" id="title1" name="mileage"
+                                   value="" placeholder="请输入车子里程" />
+                        </div>
+                        <!--手机号end-->
+                        <div class="form-group col-md-12">
+                            <label for="title">车架号 </label>
+                            <input type="text" class="form-control"  name="car_frame"
+                                   value="" placeholder="车架号" />
+                        </div>
+                            <div class="form-group col-md-12">
+                                <label for="title">车架型号 </label>
+                                <input type="text" class="form-control"  name="car_model"
+                                       value="" placeholder="车架型号" />
+                            </div>
+
+                        <!--手机号-->
+                        <!--<div class="form-group col-md-12">
+                            <label for="title">计费方式 </label>
+                            <input type="text" class="form-control" id="title1" name="billing"
+                                   value="" placeholder="请输入计费方式" />
+                        </div>-->
+                        <!--手机号end-->
+                        <!--<div class="form-group col-md-12">
+                            <label for="title">图片</label>
+                            <input type="file" class="form-control" id="title1" name="img"
+                                   value="" placeholder="请输入图片" />
+                        </div>-->
+                        <!--手机号-->
+                        <div class="form-group col-md-12">
+                            <label for="title">投放具体位置</label>
+                            <input type="text" class="form-control" id="title1" name="address"
+                                   value="" placeholder="请输入投放具体位置" />
+                        </div>
+                        <!--手机号end-->
+                        <!--<div class="form-group col-md-12">-->
+                        <!--    <label for="title">地标</label>-->
+                        <!--    <input type="text" class="form-control" id="title1" name="landmark"-->
+                        <!--           value="" placeholder="请输入地标" />-->
+                        <!--</div>-->
+                        <!--手机号-->
+                        <!--手机号end-->
+                        <div class="form-group col-md-12">
+                            <button type="submit" class="btn btn-primary ajax-post" target-form="add-form">确 定</button>
+                            <!--<button type="button" class="btn btn-default"-->
+                            <!--onclick="javascript:history.back(-1);return false;">返 回-->
+                            <!--</button>-->
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+</main>
+<!--End 页面主要内容-->
+</div>
+</div>
+
+<script type="text/javascript" src="__IMJS__/jquery.min.js"></script>
+<script type="text/javascript" src="__IMJS__/bootstrap.min.js"></script>
+<script type="text/javascript" src="__IMJS__/perfect-scrollbar.min.js"></script>
+<!--标签插件-->
+<script src="__IMJS__/jquery-tags-input/jquery.tagsinput.min.js"></script>
+<script type="text/javascript" src="__IMJS__/main.min.js"></script>
+
+<!--时间选择插件-->
+<script src="__IMJS__/bootstrap-datetimepicker/moment.min.js"></script>
+<script src="__IMJS__/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
+<script src="__IMJS__/bootstrap-datetimepicker/locale/zh-cn.js"></script>
+<!--日期选择插件-->
+<script src="__IMJS__/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+<script src="__IMJS__/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js"></script>
+<script type="text/javascript" src="__IMJS__/main.min.js"></script>
+</body>
+<script type="text/javascript" src="__PLUGINS__/layui/laydate/laydate.js"></script> <!-- 改成你的路径 -->
+<script type="text/javascript">
+    laydate.render({
+        elem: '#time1' //指定元素
+    });
+    laydate.render({
+        elem: '#time2' //指定元素
+    });
+</script>
+<script>
+    function num(obj) {
+        obj.value = obj.value.replace(/[^\d.]/g, ""); //清除"数字"和"."以外的字符
+        obj.value = obj.value.replace(/^\./g, ""); //验证第一个字符是数字
+        obj.value = obj.value.replace(/\.{2,}/g, "."); //只保留第一个, 清除多余的
+        obj.value = obj.value.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+        obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3'); //只能输入两个小数
+    }
+</script>
+
+</html>

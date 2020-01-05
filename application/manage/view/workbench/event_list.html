@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>首页</title>
+    <link rel="icon" href="favicon.ico" type="__IMIMG__/ico">
+
+    <link href="__IMCSS__/bootstrap.min.css" rel="stylesheet">
+    <link href="__IMCSS__/materialdesignicons.min.css" rel="stylesheet">
+    <link href="__IMCSS__/style.min.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="container-fluid p-t-15">
+    <div class="row">
+        <div class="card-toolbar clearfix">
+            <form class="pull-left form-inline" method="get" action="/finance/event_list" role="form">
+                <div class="form-group">
+                    <label class="sr-only" for="example-if-password">代理商名称</label>
+                    <select class="form-control" id="example-select" name="id" size="1">
+                        <option value="0">请选择</option>
+                        <option value="1" {if condition="$id eq 1"} selected {/if}>订单收益</option>
+                        <option value="2" {if condition="$id eq 2"} selected {/if}>行驶时间</option>
+                        <option value="3" {if condition="$id eq 3"} selected {/if}>行驶里程</option>
+                        <option value="4" {if condition="$id eq 4"} selected {/if}>注册量</option>
+                        <option value="5" {if condition="$id eq 5"} selected {/if}>订单量</option>
+                        <option value="6" {if condition="$id eq 6"} selected {/if}>补款金额</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="sr-only" for="example-if-password">时间</label>
+                    <input class="form-control" type="text"  name="time" id="test1" value="{$times}" placeholder="时间">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-default" type="submit">搜索</button>
+                </div>
+            </form>
+            <div class="toolbar-btn-action">
+                <!--<a class="btn btn-primary m-r-5" href="/market/activity_add"><i class="mdi mdi-plus"></i> 新增</a>-->
+                <!--<a type="button" onclick="layer_iframeadd('新增','/market/activity_add',800,500)" class="btn btn-primary m-r-5"  title="" data-toggle="tooltip" data-original-title="新增"><i class="mdi mdi-plus"></i>新增</a>-->
+                <!--<a class="btn btn-success m-r-5" href="#!" onclick="del(3,'','')"><i class="mdi mdi-check"></i> 同意</a>-->
+                <!--<a class="btn btn-warning m-r-5" href="#!" onclick="del(4,'','')"><i class="mdi mdi-block-helper"></i> 拒绝</a>-->
+                <!--<a class="btn btn-danger" href="#!" onclick="del()"><i class="mdi mdi-window-close"></i> 删除</a>-->
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4>柱形图<?php echo date('m');?>月份</h4>
+                </div>
+                <div class="card-body">
+                    <canvas class="js-chartjs-bars"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4>折线图<?php echo date('m');?>月份</h4>
+                </div>
+                <div class="card-body">
+                    <canvas class="js-chartjs-lines"></canvas>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+<script type="text/javascript" src="__IMJS__/jquery.min.js"></script>
+<script type="text/javascript" src="__IMJS__/bootstrap.min.js"></script>
+<script type="text/javascript" src="__IMJS__/main.min.js"></script>
+
+<!--图表插件-->
+<script type="text/javascript" src="__IMJS__/Chart.js"></script>
+<script src="__PLUGINS__/layui/laydate/laydate.js"></script> <!-- 改成你的路径 -->
+<script type="text/javascript">
+    $(document).ready(function (e) {
+        var $dashChartBarsCnt = jQuery('.js-chartjs-bars')[0].getContext('2d'),
+                $dashChartLinesCnt = jQuery('.js-chartjs-lines')[0].getContext('2d');
+
+        var $dashChartBarsData = {
+            labels: <?php echo $time;?>,
+            datasets: [<?php echo $list;?>]
+        };
+        var $dashChartLinesData = {
+            labels: <?php echo $time;?>,
+        datasets: [<?php echo $list;?>]
+
+        };
+
+
+        new Chart($dashChartBarsCnt, {
+            type: 'bar',
+            data: $dashChartBarsData
+        });
+        var myLineChart = new Chart($dashChartLinesCnt, {
+            type: 'line',
+            data: $dashChartLinesData,
+        });
+
+
+    });
+    laydate.render({
+        elem: '#test1' //指定元素
+    });
+</script>
+
+</body>
+
+</html>

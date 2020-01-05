@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+{include file="common:header_iframe"}
+
+<div class="container-fluid p-t-15">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-toolbar clearfix">
+                   
+                    <div class="toolbar-btn-action">
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon" >总金额</span>
+                            <input type="text" class="form-control" style="width: 20%" disabled="disabled" value="{$sum}元"
+                                   aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>编号</th>
+                                <th>用户名称</th>
+                                <th>用户电话</th>
+                                <th>代理商名称</th>
+                                <th>车子编码</th>
+                                <th>车子类型</th>
+                                <th>骑行时间</th>
+                                <th>骑行里程</th>
+                                <th>订单号</th>
+                                <th>支付金额</th>
+                                <th>实际支付费用</th>
+                                <th>是否支付</th>
+                                <th>是否在骑行中</th>
+                                <th>是否月卡抵消</th>
+                                <th>是否已经上锁</th>
+                                <th>生产订单时间</th>
+                        
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {foreach $list as $k=>$v}
+                            <tr>
+
+                                <td>{$k+1}</td>
+                                <td>{$v['user_name']}</td>
+                                 <td>{$v['phone']}</td>
+                                <td>{$v['store_name']}</td>
+                                <td>{$v['car_coding']}</td>
+                                <td>{$v['car_type']}</td>
+                                <td>{$v['riding_time']}分钟</td>
+                                <td>{$v['riding_mileage']}</td>
+                                <td>{$v['order_no']}</td>
+                                <td>{$v['price']}</td>
+                                <td>{$v['pay_price']}</td>
+                                <td>{if condition="$v['is_pay'] eq 1"} 未支付 {else/} 已支付 {/if}</td>
+                                <td>{if condition="$v['is_riding'] eq 1"} 骑行中 {else/} 骑行完毕 {/if}</td>
+                                <td>{if condition="$v['is_card'] eq 1"} 没有月卡抵消 {else/} 月卡抵消 {/if}</td>
+                                <td>{if condition="$v['is_lock'] eq 1"} 订单完成上锁成功 {else/} 未上锁 {/if}</td>
+
+                                <td>{$v['start_time']|date='Y-m-d H:i'}</td>
+
+                            
+
+                            </tr>
+                            {/foreach}
+                            </tbody>
+                        </table>
+                    </div>
+                    <ul class="pagination">
+
+                        <?php echo $page;?>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+</main>
+<!--End 页面主要内容-->
+</div>
+</div>
+
+<script type="text/javascript" src="__IMJS__/jquery.min.js"></script>
+<script type="text/javascript" src="__IMJS__/bootstrap.min.js"></script>
+<script type="text/javascript" src="__IMJS__/perfect-scrollbar.min.js"></script>
+<script type="text/javascript" src="__IMJS__/main.min.js"></script>
+<script type="text/javascript" src="__PLUGINS__/layui/layer/layer.js"></script>
+<script src="__IMJS__/jconfirm/jquery-confirm.min.js"></script>
+<!--<script type="text/javascript" src="__PLUGINS__/layui/layui.all.js" charset="utf-8"></script>-->
+<script type="text/javascript" src="__PLUGINS__/common/iframe.js" charset="utf-8"></script>
+<script src="__PLUGINS__/layui/laydate/laydate.js"></script> <!-- 改成你的路径 -->
+<script type="text/javascript">
+    $(function () {
+        $('.search-bar .dropdown-menu a').click(function () {
+            var field = $(this).data('field') || '';
+            $('#search-field').val(field);
+            $('#search-btn').html($(this).text() + ' <span class="caret"></span>');
+        });
+    });
+    laydate.render({
+        elem: '#test1' //指定元素
+    });
+    laydate.render({
+        elem: '#test2' //指定元素
+    });
+</script>
+</body>
+</html>

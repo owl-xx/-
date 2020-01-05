@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>首页</title>
+    <link rel="icon" href="favicon.ico" type="__IMIMG__/ico">
+
+    <link href="__IMCSS__/bootstrap.min.css" rel="stylesheet">
+    <link href="__IMCSS__/materialdesignicons.min.css" rel="stylesheet">
+    <link href="__IMCSS__/style.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-fluid p-t-15">
+
+        <div class="row">
+            <div class="col-sm-6 col-md-3">
+                    <div class="card bg-danger">
+                    <div class="card-body clearfix">
+
+                        <div class="pull-right" style="margin-right: 6%;>
+                            <p class="h6 text-white m-t-0">今日订单总量</p>
+                            <p class="h3 text-white m-b-0">{$orderconnt} 笔</p>
+                        </div>
+                        
+                        <div class="pull-left"> 
+                            <span class="img-avatar img-avatar-48 bg-translucent"><i
+                                    class="mdi mdi-cart-outline fa-1-5x"></i>
+                                </span> 
+                        </div>
+                    </div>
+                    <div class="card-body clearfix">
+                            <div class="pull-left">
+                                <p class="h6 text-white m-t-0">今日待付款金额</p>
+                                <p class="h3 text-white m-b-0">{$moneystart}元</p>
+                            </div>
+                            
+                            <div class="pull-right">
+                                <p class="h6 text-white m-t-0">今日已付款金额</p>
+                                <p class="h3 text-white m-b-0">{$moneyend} 元</p>
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-sm-6 col-md-3" >
+                <div class="card bg-primary">
+                    <div class="card-body clearfix">
+                        <div class="pull-right">
+                            <p class="h6 text-white m-t-0">用户总数</p>
+                            <p class="h3 text-white m-b-0">{$userconnt}</p>
+                        </div>
+                        
+                        <div class="pull-left"> 
+                            <span class="img-avatar img-avatar-48 bg-translucent">
+                                <i  class="mdi mdi-account fa-1-5x"></i>
+                            </span> 
+                        </div>
+                    </div>
+
+                    <div class="card-body clearfix" style="height: 115px;">
+                        <div class="pull-left">
+                            <p class="h6 text-white m-t-0">普通用户总数</p>
+                            <p class="h3 text-white m-b-0">{$userpt}</p>
+                        </div>
+                        <div class="pull-right">
+                                <p class="h6 text-white m-t-0">代理总数</p>
+                                <p class="h3 text-white m-b-0">{$userdl}</p>
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+        <div class="col-sm-6 col-md-3" >
+            <div class="card bg-purple">
+                <div class="card-body clearfix">
+                    <div class="pull-right" style="margin-right: 7%;">
+                        <p class="h6 text-white m-t-0">今日总收益</p>
+                        <p class="h3 text-white m-b-0">{$sum} 元 </p>
+                    </div>
+                    <div class="pull-left"> <span class="img-avatar img-avatar-48 bg-translucent"><i
+                            class="mdi mdi-currency-cny fa-1-5x"></i></span> </div>
+                </div>
+
+                <div class="card-body clearfix" style="height: 115px;">
+                    <div class="pull-left">
+                        <p class="h6 text-white m-t-0">免押金总金额</p>
+                        <p class="h3 text-white m-b-0" style="font-size: 18px;">{$change} 元</p>
+                    </div>
+                    <div class="pull-right">
+                        <p class="h6 text-white m-t-0">充值总金额</p>
+                        <p class="h3 text-white m-b-0" style="font-size: 18px;">{$prices} 元</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div class="col-sm-6 col-md-3" >
+                <div class="card bg-success">
+                    <div class="card-body clearfix">
+                        <div class="pull-right">
+                            <p class="h6 text-white m-t-0">车辆总数</p>
+                            <p class="h3 text-white m-b-0">{$car}</p>
+                        </div>
+                        <div class="pull-left"> <span class="img-avatar img-avatar-48 bg-translucent"><i
+                                    class="mdi mdi-popcorn fa-1-5x"></i></span> </div>
+                    </div>
+                    <div class="card-body clearfix" style="height: 115px;">
+                        <div class="pull-left" style="width: 43%;">
+                            <p class="h6 text-white m-t-0">故障报修已处理总数</p>
+                            <p class="h3 text-white m-b-0">{$malfunction}</p>
+                        </div>
+                        <div class="pull-right" style="width:42%;">
+                                <p class="h6 text-white m-t-0">故障报修未处理总数</p>
+                                <p class="h3 text-white m-b-0">{$malfunctions}</p>
+                        </div>
+                      
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>每周用户</h4>
+                    </div>
+                    <div class="card-body">
+                        <canvas class="js-chartjs-bars"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>交易历史记录</h4>
+                    </div>
+                    <div class="card-body">
+                        <canvas class="js-chartjs-lines"></canvas>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    <!--车辆统计详情-->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>车辆总数:{$list.car}</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>车辆在线总数</th>
+                                <th>车辆在线率</th>
+                                <th>车辆故障总数</th>
+                                <th>车辆故障率</th>
+                                <th>一级沉淀总数</th>
+                                <th>一级沉淀率</th>
+                                <th>二级沉淀总数</th>
+                                <th>二级沉淀率</th>
+                                <th>车辆电量低于20%总数</th>
+                                <th>车辆电量低于20%率</th>
+                                <th>车辆电量低于40%总数</th>
+                                <th>车辆电量低于40%率</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <tr>
+                                <td>{$list.car_line}</td>
+                                <td>{$list.car_lines}</td>
+                                <td>{$list.car_fault}</td>
+                                <td>{$list.car_faults}</td>
+                                <td>{$list.car_precipitate}</td>
+                                <td>{$list.car_precipitates}</td>
+                                <td>{$list.car_precipitatea}</td>
+                                <td>{$list.car_precipitatesa}</td>
+                                <td>{$list.car_quantity}</td>
+                                <td>{$list.car_quantitys}</td>
+                                <td>{$list.car_quantitya}</td>
+                                <td>{$list.car_quantitysa}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+    <!--微信统计信息-->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>统计信息</h4>
+                    <form class="pull-right form-inline" method="get" action="/admin/main" role="form">
+                        <div class="form-group">
+                            <label class="sr-only" for="example-if-password">时间</label>
+                            <input class="form-control" type="text"  name="time" id="test12" placeholder="时间">
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-default" type="submit">搜索</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="card-body">
+
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>名称</th>
+                                <th>当前数量</th>
+                                <th>当前时间</th>
+                                <th>状态</th>
+                                <th>进度</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <tr>
+                                <td>1</td>
+                                <td>微信登录数</td>
+                                <td style="display: inherit;">{$arr_arra['user_vx_sum']} 次</td>
+                                <td style="width: 198px;">{$time}</td>
+                                <td><span class="label label-success">微信</span></td>
+                                <td>
+                                    <?php $a=$arr_arra['user_vx_sum']/$arr_arra['user_vx_sum_zong']*100; ?>
+                                    <div class="progress progress-striped progress-sm">
+                                        <div class="progress-bar progress-bar-success"
+                                             style="width: <?php echo $a;?>%;"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>手机注册数</td>
+                                <td style="display: inherit;">{$arr_arra['user_phgone_sum']} 次</td>
+                                <td style="width: 198px;">{$time}</td>
+                                <td><span class="label label-danger">手机</span></td>
+                                <td>
+                                    <?php $a=$arr_arra['user_phgone_sum']/$arr_arra['user_vx_sum_zong']*100; ?>
+                                    <div class="progress progress-striped progress-sm">
+                                        <div class="progress-bar progress-bar-danger"
+                                             style="width: <?php echo $a;?>%;"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>实名认证书</td>
+                                <td style="display: inherit;">{$arr_arra['user_card_sum']} 次</td>
+                                <td style="width: 198px;">{$time}</td>
+                                <td><span class="label label-warning">实名</span></td>
+                                <td>
+                                    <?php $a=$arr_arra['user_card_sum']/$arr_arra['user_vx_sum_zong']*100; ?>
+                                    <div class="progress progress-striped progress-sm">
+                                        <div class="progress-bar progress-bar-warning"
+                                             style="width: <?php echo $a;?>%;"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>押金卡数</td>
+                                <td style="display: inherit;">{$arr_arra['user_price_sum']} 次</td>
+                                <td style="width: 198px;">{$time}</td>
+                                <td><span class="label label-danger">押金</span></td>
+                                <td>
+                                    <?php $a=$arr_arra['user_price_sum']/$arr_arra['user_vx_sum_zong']*100; ?>
+                                    <div class="progress progress-striped progress-sm">
+                                        <div class="progress-bar progress-bar-danger"
+                                             style="width: <?php echo $a;?>%;"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>充值数</td>
+                                <td style="display: inherit;">{$arr_arra['user_order_sum']} 次</td>
+                                <td style="width: 198px;">{$time}</td>
+                                <td><span class="label label-success">充值</span></td>
+                                <td>
+                                    <div class="progress progress-striped progress-sm">
+                                        <div class="progress-bar progress-bar-success"
+                                             style="width: 100%;"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--资金信息-->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>资金信息</h4>
+                    <form class="pull-right form-inline" method="get" action="/admin/main" role="form">
+                        <div class="form-group">
+                            <label class="sr-only" for="example-if-password">时间</label>
+                            <input class="form-control" type="text"  name="time" id="test13" placeholder="时间">
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-default" type="submit">搜索</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>名称</th>
+                                <th>金额</th>
+                                <th>当前时间</th>
+                                <th>状态</th>
+                                <th>进度</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <tr>
+                                <td>1</td>
+                                <td>今日总收益</td>
+                                <td>{$revens} 元</td>
+                                <td style="width: 198px;">{$time}</td>
+                                <td><span class="label label-success">正常</span></td>
+                                <td>
+                                    <?php $a=$arr_arra['user_vx_sum']/$arr_arra['user_vx_sum_zong']*100; ?>
+                                    <div class="progress progress-striped progress-sm">
+                                        <div class="progress-bar progress-bar-success"
+                                             style="width: <?php echo $a;?>%;"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>今日免押金总金额</td>
+                                <td>{$change} 元</td>
+                                <td style="width: 198px;">{$time}</td>
+                                <td><span class="label label-success">正常</span></td>
+                                <td>
+                                    <?php $a=$arr_arra['user_vx_sum']/$arr_arra['user_vx_sum_zong']*100; ?>
+                                    <div class="progress progress-striped progress-sm">
+                                        <div class="progress-bar progress-bar-success"
+                                             style="width: <?php echo $a;?>%;"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>今日充值总金额</td>
+                                <td>{$prices} 元</td>
+                                <td style="width: 198px;">{$time}</td>
+                                <td><span class="label label-success">正常</span></td>
+                                <td>
+                                    <?php $a=$arr_arra['user_vx_sum']/$arr_arra['user_vx_sum_zong']*100; ?>
+                                    <div class="progress progress-striped progress-sm">
+                                        <div class="progress-bar progress-bar-success"
+                                             style="width: <?php echo $a;?>%;"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>今日欠款总金额</td>
+                                <td>{$owed} 元</td>
+                                <td style="width: 198px;">{$time}</td>
+                                <td><span class="label label-success">正常</span></td>
+                                <td>
+                                    <?php $a=$arr_arra['user_card_sum']/$arr_arra['user_vx_sum_zong']*100; ?>
+                                    <div class="progress progress-striped progress-sm">
+                                        <div class="progress-bar progress-bar-warning"
+                                             style="width: <?php echo $a;?>%;"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>今日欠款回收金额</td>
+                                <td>{$owedh} 元</td>
+                                <td style="width: 198px;">{$time}</td>
+                                <td><span class="label label-success">正常</span></td>
+                                <td>
+                                    <div class="progress progress-striped progress-sm">
+                                        <div class="progress-bar progress-bar-success"
+                                             style="width: 100%;"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--订单信息-->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>订单信息</h4>
+                    <form class="pull-right form-inline" method="get" action="/admin/main" role="form">
+                        <div class="form-group">
+                            <label class="sr-only" for="example-if-password">时间</label>
+                            <input class="form-control" type="text"  name="time" id="test14" placeholder="时间">
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-default" type="submit">搜索</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>名称</th>
+                                <th>金额</th>
+                                <th>当前时间</th>
+                                <th>状态</th>
+                                <th>进度</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <tr>
+                                <td>1</td>
+                                <td>当天总订单数</td>
+                                <td>{$orderconnt} 笔</td>
+                                <td style="width: 198px;">{$time}</td>
+                                <td><span class="label label-success">正常</span></td>
+                                <td>
+                                    <?php $a=$arr_arra['user_vx_sum']/$arr_arra['user_vx_sum_zong']*100; ?>
+                                    <div class="progress progress-striped progress-sm">
+                                        <div class="progress-bar progress-bar-success"
+                                             style="width: <?php echo $a;?>%;"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>收费订单数</td>
+                                <td>{$charorder} 笔</td>
+                                <td style="width: 198px;">{$time}</td>
+                                <td><span class="label label-success">正常</span></td>
+                                <td>
+                                    <?php $a=$arr_arra['user_vx_sum']/$arr_arra['user_vx_sum_zong']*100; ?>
+                                    <div class="progress progress-striped progress-sm">
+                                        <div class="progress-bar progress-bar-success"
+                                             style="width: <?php echo $a;?>%;"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>未产生收益订单</td>
+                                <td>{$noworder} 笔</td>
+                                <td style="width: 198px;">{$time}</td>
+                                <td><span class="label label-success">正常</span></td>
+                                <td>
+                                    <?php $a=$arr_arra['user_vx_sum']/$arr_arra['user_vx_sum_zong']*100; ?>
+                                    <div class="progress progress-striped progress-sm">
+                                        <div class="progress-bar progress-bar-success"
+                                             style="width: <?php echo $a;?>%;"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>订单均价</td>
+                                <td>{$aveorder} 元</td>
+                                <td style="width: 198px;">{$time}</td>
+                                <td><span class="label label-success">正常</span></td>
+                                <td>
+                                    <?php $a=$arr_arra['user_vx_sum']/$arr_arra['user_vx_sum_zong']*100; ?>
+                                    <div class="progress progress-striped progress-sm">
+                                        <div class="progress-bar progress-bar-success"
+                                             style="width: <?php echo $a;?>%;"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>订单/车的比率</td>
+                                <td>{$ordercars} </td>
+                                <td style="width: 198px;">{$time}</td>
+                                <td><span class="label label-success">正常</span></td>
+                                <td>
+                                    <div class="progress progress-striped progress-sm">
+                                        <div class="progress-bar progress-bar-success"
+                                             style="width: 100%;"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+
+    <script type="text/javascript" src="__IMJS__/jquery.min.js"></script>
+    <script type="text/javascript" src="__IMJS__/bootstrap.min.js"></script>
+    <script type="text/javascript" src="__IMJS__/perfect-scrollbar.min.js"></script>
+    <script type="text/javascript" src="__IMJS__/main.min.js"></script>
+    <script type="text/javascript" src="__PLUGINS__/layui/layer/layer.js"></script>
+    <script src="__IMJS__/jconfirm/jquery-confirm.min.js"></script>
+    <!--<script type="text/javascript" src="__PLUGINS__/layui/layui.all.js" charset="utf-8"></script>-->
+    <script type="text/javascript" src="__PLUGINS__/common/iframe.js" charset="utf-8"></script>
+    <script type="text/javascript" src="__PLUGINS__/layui/laydate/laydate.js"></script> <!-- 改成你的路径 -->
+    <script type="text/javascript">
+        laydate.render({
+            elem: '#test12', //指定元素
+            trigger: 'click'
+        });
+        laydate.render({
+            elem: '#test13', //指定元素
+            trigger: 'click'
+        });
+        laydate.render({
+            elem: '#test14', //指定元素
+            trigger: 'click'
+        });
+    </script>
+    <!--图表插件-->
+    <script type="text/javascript" src="__IMJS__/Chart.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function (e) {
+            var $dashChartBarsCnt = jQuery('.js-chartjs-bars')[0].getContext('2d'),
+                $dashChartLinesCnt = jQuery('.js-chartjs-lines')[0].getContext('2d');
+            var  count = <?php echo $connt; ?>;
+            console.log(count);
+            var $dashChartBarsData = {
+                labels: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+                datasets: [
+                    {
+                        label: '注册用户',
+                        borderWidth: 1,
+                        borderColor: 'rgba(0,0,0,0)',
+                        backgroundColor: 'rgba(51,202,185,0.5)',
+                        hoverBackgroundColor: "rgba(51,202,185,0.7)",
+                        hoverBorderColor: "rgba(0,0,0,0)",
+                        data: count
+                    }
+                ]
+            };
+            var  cout = <?php echo $cont; ?>;
+            var  conts = <?php echo $conts; ?>;
+            var $dashChartLinesData = {
+                labels: conts,
+                datasets: [
+                    {
+                        label: '交易资金',
+                        data: cout,
+                        borderColor: '#358ed7',
+                        backgroundColor: 'rgba(53, 142, 215, 0.175)',
+                        borderWidth: 1,
+                        fill: false,
+                        lineTension: 0.5
+                    }
+                ]
+            };
+
+            new Chart($dashChartBarsCnt, {
+                type: 'bar',
+                data: $dashChartBarsData
+            });
+
+            var myLineChart = new Chart($dashChartLinesCnt, {
+                type: 'line',
+                data: $dashChartLinesData,
+            });
+        });
+    </script>
+</body>
+
+</html>

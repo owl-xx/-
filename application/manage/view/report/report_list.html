@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+{include file="common:header_iframe"}
+
+<div class="container-fluid p-t-15">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-toolbar clearfix">
+                    <form class="pull-right form-inline" method="get" action="/car/report_list" role="form">
+                        <div class="form-group">
+                            <label class="sr-only" for="example-if-password">代理商名称</label>
+                            <select class="form-control" id="example-select" name="id" size="1">
+                                <option value="0">请选择</option>
+                                <option value="5" {if condition="$id eq 5"} selected {/if}>未处理</option>
+                                <option value="1" {if condition="$id eq 1"} selected {/if}>处理中</option>
+                                <option value="2" {if condition="$id eq 2"} selected {/if}>已完成</option>
+                                <option value="3" {if condition="$id eq 3"} selected {/if}>核实完成</option>
+                                <option value="4" {if condition="$id eq 4"} selected {/if}>核实无效</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="sr-only" for="example-if-password">时间</label>
+                            <input class="form-control" type="text"  name="time" id="test12" value="{$time}" placeholder="时间">
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-default" type="submit">搜索</button>
+                        </div>
+                    </form>
+                    <div class="toolbar-btn-action">
+                        <!--<a class="btn btn-primary m-r-5" href=""><i class="mdi mdi-plus"></i> 新增</a>-->
+                        <!--<a type="button" onclick="layer_iframeadd('新增','/market/activity_add',800,500)" class="btn btn-primary m-r-5"  title="" data-toggle="tooltip" data-original-title="新增"><i class="mdi mdi-plus"></i>新增</a>-->
+                        <!--<a class="btn btn-success m-r-5" href="#!" onclick="del(3,'','')"><i class="mdi mdi-check"></i> 同意</a>-->
+                        <!--<a class="btn btn-warning m-r-5" href="#!" onclick="del(4,'','')"><i class="mdi mdi-block-helper"></i> 拒绝</a>-->
+                        <!--<a class="btn btn-danger" href="#!" onclick="del()"><i class="mdi mdi-window-close"></i> 删除</a>-->
+                    </div>
+                </div>
+                <div class="card-body">
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>编号</th>
+                                <th>图片</th>
+                                <th>用户名称</th>
+                                <th>车辆编码</th>
+                                <th>故障单号</th>
+                                <th>车子类型</th>
+                                <th>故障类型</th>
+                                <th>备注</th>
+                                <th>报修时间</th>
+                                <th>状态</th>
+                                <th>车子地址</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {foreach $list as $k=>$v}
+                            <tr>
+
+                                <td>{$k+1}</td>
+                                <td><img src="https://manageapi.shuangbeizn.com/uploads/{$v['img']}" style="width: 100px;height: 100px"></td>
+                                <td>{$v['userName']}</td>
+                                <td>{$v['car_id']}</td>
+                                <td>{$v['order_no']}</td>
+                                <td>{$v['type']}</td>
+                                <td>{$v['car_state_name']}</td>
+                                <td>{$v['remarks']}</td>
+                                <td>{$v['addtime']|date='Y-m-d H:i'}</td>
+                                <td>{if condition="$v['state'] eq 5"}未处理  {elseif condition="$v['state'] eq 1" }处理中
+                                    {elseif condition="$v['state'] eq 2" }已完成  {elseif condition="$v['state'] eq 3" } 核实完成 {elseif condition="$v['state'] eq 4" } 核实无效 {/if}</td>
+
+                                <td>{$v['address']}</td>
+                                <td>
+                                    <div class="example-icons">
+
+                                        {if condition="$v['state'] eq 1"}
+
+                                        <a type="button" onclick="return confirm('无需在处理了!','/car/report_update_batch/id/',{$v['id']})" class="role-add btn btn-xs btn-default m-r-5" title="" data-toggle="tooltip" data-original-title="处理中"><i class="mdi mdi-pin"></i></a>
+                                        {elseif condition="$v['state'] eq 5" }
+
+                                        <a type="button" onclick="return confirm('确定要处理吗?','/car/report_update/id/',{$v['id']})" class="role-add btn btn-xs btn-default m-r-5" title="" data-toggle="tooltip" data-original-title="未处理"><i class="mdi mdi-pin-off"></i></a>
+                                        {/if}
+                                        <!--
+                                        <a type="button" onclick="return confirm('确定要删除吗','/car/report_del/id/',{$v['id']})" class="role-delete btn btn-xs btn-default" title="" data-toggle="tooltip" data-original-title="删除"><i class="mdi mdi-delete"></i></a>
+                                        -->
+                                    </div>
+                                </td>
+
+                            </tr>
+                            {/foreach}
+                            </tbody>
+                        </table>
+                    </div>
+                    <ul class="pagination">
+
+                        <?php echo $page;?>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+</main>
+<!--End 页面主要内容-->
+</div>
+</div>
+<script type="text/javascript" src="__IMJS__/jquery.min.js"></script>
+<script type="text/javascript" src="__IMJS__/bootstrap.min.js"></script>
+<script type="text/javascript" src="__IMJS__/perfect-scrollbar.min.js"></script>
+<script type="text/javascript" src="__IMJS__/main.min.js"></script>
+<script type="text/javascript" src="__PLUGINS__/layui/layer/layer.js"></script>
+<script src="__IMJS__/jconfirm/jquery-confirm.min.js"></script>
+<!--<script type="text/javascript" src="__PLUGINS__/layui/layui.all.js" charset="utf-8"></script>-->
+<script type="text/javascript" src="__PLUGINS__/common/iframe.js" charset="utf-8"></script>
+<script type="text/javascript" src="__PLUGINS__/layui/laydate/laydate.js"></script> <!-- 改成你的路径 -->
+<script type="text/javascript">
+    laydate.render({
+        elem: '#test12' //指定元素
+    });
+</script>
+
+</body>
+</html>

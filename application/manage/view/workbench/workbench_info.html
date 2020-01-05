@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+{include file="common:header_iframe"}
+
+<div class="container-fluid p-t-15">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header"><h4>用户详情</h4></div>
+                <div class="card-body">
+                    <form action="##" method="post" onsubmit="return false;">
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon" >推荐人</span>
+                            <input type="text" class="form-control" disabled="disabled" value="{$name}"
+                                   aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon" >手机号</span>
+                            <input type="text" class="form-control" disabled="disabled" value="{$list['phone']}"
+                                   aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon " >微信openid</span>
+                            <input type="text" class="form-control" disabled="disabled" value="{$list['openid']}"
+                            >
+                        </div>
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon" >账户名</span>
+                            <input type="text" class="form-control" disabled="disabled" value="{$list['account']}"
+                                   aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon">代理商所在地区</span>
+                            <input type="text" class="form-control" disabled="disabled" value="{$list['city']}"
+                                   aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon" >上次登陆时间</span>
+                            <input type="text" class="form-control" disabled="disabled" value="{$list['login_time']|date='Y-m-d H:i'}"
+                            aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon">登陆ip地址</span>
+                            <input type="text" class="form-control" disabled="disabled" value="{$list['login_ip']}"
+                                   aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon" >登陆状态</span>
+                            <input type="text" class="form-control" disabled="disabled" value="{if condition="$list['state'] eq 0"}正常 {elseif condition="$list['state'] eq 1" }不可登陆  {/if}"
+                            aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon " >生成时间</span>
+                            <input type="text" class="form-control" disabled="disabled" value="{$list['addtime']|date='Y-m-d H:i'}"
+                            >
+                        </div>
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon" >名字</span>
+                            <input type="text" class="form-control" disabled="disabled" value="{$list['name']}"
+                                   aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon">代理商管理的第一个坐标</span>
+                            <input type="text" class="form-control" disabled="disabled" value="<?php echo getRealyAddress($list['location1']); ?>"
+                                   aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon">代理商管理的第二个坐标</span>
+                            <input type="text" class="form-control" disabled="disabled" value="<?php echo getRealyAddress($list['location2']); ?>"
+                                   aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon">代理商管理的第三个坐标</span>
+                            <input type="text" class="form-control" disabled="disabled" value="<?php echo getRealyAddress($list['location3']); ?>"
+                                   aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon">代理商管理的第四个坐标</span>
+                            <input type="text" class="form-control" disabled="disabled" value="<?php echo getRealyAddress($list['location4']); ?>"
+                                   aria-describedby="basic-addon1">
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script type="text/javascript" src="__IMJS__/jquery.min.js"></script>
+<script type="text/javascript" src="__IMJS__/bootstrap.min.js"></script>
+<script type="text/javascript" src="__IMJS__/main.min.js"></script>
+</body>
+</html>

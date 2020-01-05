@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+{include file="common:header_iframe"}
+
+<div class="container-fluid p-t-15">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header"><h4>用户详情</h4></div>
+                <div class="card-body">
+                    <form action="##" method="post" onsubmit="return false;">
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon" >车辆编码</span>
+                            <input type="text" class="form-control" disabled="disabled" value="{$list['car_coding']}"
+                                   aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon" >流量卡编号</span>
+                            <input type="text" class="form-control" disabled="disabled" value="{$list['iccid']}"
+                                   aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon " >IMEI号码</span>
+                            <input type="text" class="form-control" disabled="disabled" value="{$list['IMEI']}"
+                            >
+                        </div>
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon" >地区</span>
+                            <input type="text" class="form-control" disabled="disabled" value="{$list['city']}"
+                                   aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon">电量</span>
+                            <input type="text" class="form-control" disabled="disabled" value="{$list['electricity']}%"
+                                   aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon" >可骑行多少公里</span>
+                            <input type="text" class="form-control" disabled="disabled" value="{$list['distance']}"
+                                   aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon">车子里程</span>
+                            <input type="text" class="form-control" disabled="disabled" value="{$list['mileage']}"
+                                   aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon" >计费方式 </span>
+                            <input type="text" class="form-control" disabled="disabled" value="{$list['billing']}"
+                            aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon " >车子图片</span>
+                            <img src="/uploads/{$list['img']}" style="width: 100px;height: 100px">
+                        </div>
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon" >车子状态</span>
+                            <input type="text" class="form-control" disabled="disabled" value="{if condition="$list['type'] eq 0"}未租未锁  {elseif condition="$list['type'] eq 1" }未租未断电  {elseif condition="$list['type'] eq 2" }长时间未还  {elseif condition="$list['type'] eq 3" } 长时间未查看 {elseif condition="$list['type'] eq 4" } 长时间未使用 {elseif condition="$list['type'] eq 5" } 正常 {elseif condition="$list['type'] eq 6" } 车辆故障  {elseif condition="$list['type'] eq 7" } 上线 {elseif condition="$list['type'] eq 8" } 下线  {elseif condition="$list['type'] eq 9" } 服务区外 {elseif condition="$list['type'] eq 10" } 定位失败{elseif condition="$list['type'] eq 11" }未租未查 {/if}"
+                                   aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon">具体位置</span>
+                            <input type="text" class="form-control" disabled="disabled" value="<?php  echo $list['address']; ?>"
+                                   aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon">地标</span>
+                            <input type="text" class="form-control" disabled="disabled" value="<?php  echo $list['landmark']; ?>"
+                                   aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon">录入时间</span>
+                            <input type="text" class="form-control" disabled="disabled" value="<?php  echo $list['addtime']; ?>"
+                                   aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon">车子运行状态</span>
+                            <input type="text" class="form-control" disabled="disabled" value="{if condition="$list['type'] eq 0"}正常 {else/} 异常  {/if}"
+                                   aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon">车子异常的原因</span>
+                            <input type="text" class="form-control" disabled="disabled" value="{$list['content']}"
+                                   aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon">是否上线</span>
+                            <input type="text" class="form-control" disabled="disabled" value="{if condition="$list['is_login'] eq 1"}上线 {elseif condition="$list['is_login'] eq 2"} 未上线 {else/} 下线  {/if}"
+                                   aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon">投放时间</span>
+                            <input type="text" class="form-control" disabled="disabled"
+                                   value="{$list['login_time']|date='Y-m-d H:i'}"
+                                   aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon">上线位置</span>
+                            <input type="text" class="form-control" disabled="disabled" value="{$list['login_location']}"
+                                   aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon">下线时间</span>
+                            <input type="text" class="form-control" disabled="disabled" value="{$list['offline_time']}"
+                                   aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon">下线原因</span>
+                            <input type="text" class="form-control" disabled="disabled" value="{$list['offline_reason']}"
+                                   aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon">下线位置</span>
+                            <input type="text" class="form-control" disabled="disabled" value="{$list['offline_location']}"
+                                   aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon">故障 </span>
+                            <input type="text" class="form-control" disabled="disabled" value="{$list['is_malfunction']}"
+                                   aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon">车子是否断电</span>
+                            <input type="text" class="form-control" disabled="disabled" value="{if condition="$list['is_electricity'] eq 1"}正常 {else/} 断电  {/if}"
+                                   aria-describedby="basic-addon1">
+                        </div> <div class="input-group m-b-10 col-xs-9">
+                        <span class="input-group-addon">更新时间</span>
+                        <input type="text" class="form-control" disabled="disabled" value="{$list['time']|date='Y-m-d H:i'}"
+                               aria-describedby="basic-addon1">
+                    </div>
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon">租用状态下使用了多久</span>
+                            <input type="text" class="form-control" disabled="disabled" value="{$list['use_time']}"
+                                   aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon">是否被盗</span>
+                            <input type="text" class="form-control" disabled="disabled" value="{if condition="$list['warn'] eq 1"}正常 {else/} 被盗  {/if}"
+                                   aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon">沉淀时长</span>
+                            <input type="text" class="form-control" disabled="disabled" value="{$list['precipitation_time']}"
+                                   aria-describedby="basic-addon1">
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script type="text/javascript" src="__IMJS__/jquery.min.js"></script>
+<script type="text/javascript" src="__IMJS__/bootstrap.min.js"></script>
+<script type="text/javascript" src="__IMJS__/main.min.js"></script>
+</body>
+</html>

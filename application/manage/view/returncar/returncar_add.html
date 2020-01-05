@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+{include file="common:header_iframe"}
+<style type="text/css">
+    .loca-area {
+        width: 1000px;
+        margin: 0 auto;
+        height: auto;
+        margin-top: 30px;
+        overflow: hidden
+    }
+
+    .loca-area .left,
+    .loca-area .right {
+        float: left;
+    }
+
+    .loca-area .item {
+        width: 50%;
+        height: 30px;
+        margin-bottom: 10px;
+        float: left;
+        font-size: 12px;
+        color: rgba(0,0,0,0.85);
+    }
+</style>
+
+<div class="container-fluid p-t-15">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+
+                    <form action="/returncar/returncar_add_batch" method="post" class="row">
+
+                        <!--手机号-->
+                        <div class="form-group col-md-12">
+                            <label for="title">城市</label>
+                            <input type="text" class="form-control" id="title1" name="city"
+                                   value="" placeholder="请输入城市" />
+                        </div>
+                        <!--手机号end-->
+                        <!--用户昵称-->
+                        <div class="form-group col-md-12">
+                            <label for="type">选择代理商</label>
+                            <div class="form-controls">
+                                <select name="store_id" class="form-control" id="type">
+                                    <option value="0">请选择</option>
+                                    {foreach  $list as $k=>$v}
+                                    <option value="{$v['id']}">{$v['name']}</option>
+                                    {/foreach}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-12">
+                            <label for="title">超出区域费用</label>
+                            <input type="text" class="form-control" id="title2" name="handling_fee"
+                                   value="" placeholder="请输入超出区域费用"  onkeyup="num(this)"  />
+                        </div>
+                     <!--    <div class="form-group col-md-12">
+                        <label for="type">状态</label>
+                        <div class="form-controls">
+                        <select name="state" class="form-control" id="types">
+                        <option value="1">正常</option>
+                        <option value="2">已下线</option>
+                        </select>
+                        </div>
+                        </div> -->
+                        <div class="form-group col-md-12">
+                            <label for="type">还车点直径</label>
+                            <div class="form-controls">
+                                <select name="number" class="form-control" id="number">
+                                    <option value="10">10米</option>
+                                    <option value="30">30米</option>
+                                    <option value="50">50米</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- <div  class="form-group col-md-12">
+                            <label for="title">选择还车区域</label>
+                            <p style="text-align: center;color: red;">温馨提示:选取区域坐标点请严格按照顺时针或逆时针方向依次选取(最少选取三个坐标点),如操作有误请点击<button onclick="window.location.reload()">重新选取</button></p>
+                            <div id="test" style="height: 500px;width: 1000px;margin:0 auto;"></div>
+                            <div class="loca-area">
+                            </div>
+
+                        </div> -->
+                        <div  class="form-group col-md-12">
+                            <label for="title">选择还车点</label>
+                            <p style="text-align: center;color: red;">温馨提示:选取区域坐标点请严格按照顺时针或逆时针方向依次选取(最少选取三个坐标点)
+                                <!--,如操作有误请点击<span onclick="reds()" style="width: 20px;border: solid red 1px">重新选取</span>-->
+                            </p>
+                            <div id="test1" style="height: 500px;width: 1000px;margin:0 auto;"></div>
+                            <div class="loca-area1">
+                            </div>
+
+                        </div>
+
+                        <!--<div class="form-group col-md-12">-->
+                        <!--<label for="title">结束时间</label>-->
+                        <!--<input type="text" class="form-control" id="time2" name="end_time"-->
+                        <!--value="" placeholder="请输入结束时间" />-->
+                        <!--</div>-->
+
+
+                        <div class="form-group col-md-12">
+                            <button type="submit" class="btn btn-primary ajax-post" target-form="add-form">确 定</button>
+                            <!--<button type="button" class="btn btn-default"-->
+                            <!--onclick="javascript:history.back(-1);return false;">返 回-->
+                            <!--</button>-->
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+</main>
+<!--End 页面主要内容-->
+</div>
+</div>
+
+<script type="text/javascript" src="__IMJS__/jquery.min.js"></script>
+<script type="text/javascript" src="__IMJS__/bootstrap.min.js"></script>
+<script type="text/javascript" src="__IMJS__/perfect-scrollbar.min.js"></script>
+<!--标签插件-->
+<script src="__IMJS__/jquery-tags-input/jquery.tagsinput.min.js"></script>
+<script type="text/javascript" src="__IMJS__/main.min.js"></script>
+
+<!--时间选择插件-->
+<script src="__IMJS__/bootstrap-datetimepicker/moment.min.js"></script>
+<script src="__IMJS__/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
+<script src="__IMJS__/bootstrap-datetimepicker/locale/zh-cn.js"></script>
+<!--日期选择插件-->
+<script src="__IMJS__/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+<script src="__IMJS__/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js"></script>
+<script type="text/javascript" src="__IMJS__/main.min.js"></script>
+
+<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp&key=S73BZ-2Y3LF-YR4JD-NLJGJ-CDQD6-ODFSX"></script>
+<script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+</body>
+<script type="text/javascript" src="__PLUGINS__/layui/laydate/laydate.js"></script> <!-- 改成你的路径 -->
+<script type="text/javascript">
+    var arr = []
+    var geo = new qq.maps.Geocoder()
+    geo.getLocation('中国,成都')
+    geo.setComplete(function(res) {
+        console.log(res.detail.location)
+        var mymap = new qq.maps.Map(document.getElementById('test'), {
+            center: res.detail.location,
+            zoom: 10,
+            draggable: true,
+            scrollwheel: true,
+            disableDoubleClickZoom: false
+        })
+        var citylocation = new qq.maps.CityService({
+            map: mymap,
+            complete: function(results) {
+                console.log(9999, results)
+            }
+        });
+        qq.maps.event.addListener(mymap, 'click', function(e) {
+            console.log('点击地图', e)
+            console.log('点击地图', e.latLng.getLng())
+            var obj = {
+                lat: e.latLng.getLat(),
+                lng: e.latLng.getLng()
+            }
+            var marker = new qq.maps.Marker({
+                position: e.latLng,
+                map: mymap
+            });
+            arr.push(obj)
+//            console.log('已选坐标点', arr)
+            locationlist()
+            mymap.open
+        });
+
+    })
+    function locationlist() {
+        var e = "";
+        for(var i = 0; i < arr.length; i++) {
+            var num = i + 1;
+            e += ' <label for="title">坐标点' + num + '</label>'
+            e  += ' <input type="text" class="form-control "  readonly="readonly"  name="'+'location[]'+'" value="'+arr[i].lat+','+arr[i].lng+'">'
+        }
+        $(".loca-area").html(e)
+    }
+</script>
+<script type="text/javascript">
+    var arr1 = []
+    var geo1 = new qq.maps.Geocoder()
+    geo1.getLocation('中国,成都')
+    geo1.setComplete(function(res) {
+        console.log(res.detail.location)
+        var mymap = new qq.maps.Map(document.getElementById('test1'), {
+            center: res.detail.location,
+            zoom: 10,
+            draggable: true,
+            scrollwheel: true,
+            disableDoubleClickZoom: false
+        })
+        var citylocation = new qq.maps.CityService({
+            map: mymap,
+            complete: function(results) {
+                console.log(9999, results)
+            }
+        });
+        qq.maps.event.addListener(mymap, 'click', function(e) {
+            console.log('点击地图', e)
+            console.log('点击地图', e.latLng.getLng())
+            var obj = {
+                lat: e.latLng.getLat(),
+                lng: e.latLng.getLng()
+            }
+            var marker = new qq.maps.Marker({
+                position: e.latLng,
+                map: mymap
+            });
+            arr1.push(obj)
+//            console.log('已选坐标点', arr)
+            locationlist1()
+            mymap.open
+        });
+
+    })
+    function locationlist1() {
+        var e = "";
+        for(var i = 0; i < arr1.length; i++) {
+            var num = i + 1;
+            e += ' <label for="title">坐标点' + num + '</label>'
+            e  += ' <input type="text" class="form-control "  readonly="readonly"  name="'+'location1[]'+'" value="'+arr1[i].lat+','+arr1[i].lng+'">'
+        }
+        $(".loca-area1").html(e)
+    }
+    function reds(){
+        $(".loca-area").html('')
+    }
+</script>
+
+<script type="text/javascript">
+    console.log(returnCitySN, returnCitySN["cip"] + ',' + returnCitySN["cname"]) //获取ip可进行ip定位
+</script>
+
+<script type="text/javascript">
+    $(".items").click(function(){
+        $(".lefts").css('display','block');
+    });
+</script>
+<script type="text/javascript">
+    laydate.render({
+        elem: '#time1' //指定元素
+    });
+    laydate.render({
+        elem: '#time2' //指定元素
+    });
+</script>
+<script>
+    function num(obj) {
+        obj.value = obj.value.replace(/[^\d.]/g, ""); //清除"数字"和"."以外的字符
+        obj.value = obj.value.replace(/^\./g, ""); //验证第一个字符是数字
+        obj.value = obj.value.replace(/\.{2,}/g, "."); //只保留第一个, 清除多余的
+        obj.value = obj.value.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+        obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3'); //只能输入两个小数
+    }
+</script>
+
+</html>

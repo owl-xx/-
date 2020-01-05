@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+{include file="common:header_iframe"}
+
+<div class="container-fluid p-t-15">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-toolbar clearfix">
+                    <form class="pull-right form-inline" method="get" action="/finance/car_malfunction_list" role="form">
+                        <div class="form-group">
+                            <label class="sr-only" for="example-if-password">代理商名称</label>
+                            <input class="form-control" type="text"  name="title" value="{$title}" placeholder="请输入代理商名称">
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-default" type="submit">搜索</button>
+                        </div>
+                    </form>
+                    <div class="toolbar-btn-action">
+                        <!--<a class="btn btn-primary m-r-5" href="/market/activity_add"><i class="mdi mdi-plus"></i> 新增</a>-->
+                        <!--<a type="button" onclick="layer_iframeadd('新增','/market/activity_add',800,500)" class="btn btn-primary m-r-5"  title="" data-toggle="tooltip" data-original-title="新增"><i class="mdi mdi-plus"></i>新增</a>-->
+                        <!--<a class="btn btn-success m-r-5" href="#!" onclick="del(3,'','')"><i class="mdi mdi-check"></i> 同意</a>-->
+                        <!--<a class="btn btn-warning m-r-5" href="#!" onclick="del(4,'','')"><i class="mdi mdi-block-helper"></i> 拒绝</a>-->
+                        <!--<a class="btn btn-danger" href="#!" onclick="del()"><i class="mdi mdi-window-close"></i> 删除</a>-->
+                    </div>
+                </div>
+                <div class="card-body">
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+
+                                <th>编号</th>
+                                <th>代理商名称</th>
+                                <th>总故障车辆</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {foreach $list as $k=>$v}
+                            <tr>
+
+                                <td>{$k+1}</td>
+                                <td>{$v['proxy_name']}</td>
+                                <td><a type="button" onclick="layer_iframe('查看详情','/finance/car_list/id/',800,500,{$v['store_id']})" class="role-edit btn btn-xs btn-default m-r-5" title="" data-toggle="tooltip" data-original-title="查看详情"><?php echo count($v['id']);?></a></td>
+                                <td>
+                                    <div class="example-icons">
+
+                                        <a type="button" onclick="layer_iframe('查看详情','/finance/car_malfunction_list_gz/id/',800,500,{$v['store_id']})" class="role-edit btn btn-xs btn-default m-r-5" title="" data-toggle="tooltip" data-original-title="查看详情"><i class="mdi mdi-message"></i></a>
+
+                                    </div>
+                                </td>
+                            </tr>
+                            {/foreach}
+                            </tbody>
+                        </table>
+                    </div>
+                    <ul class="pagination">
+                        <!--<li class="disabled"><span>«</span></li>-->
+                        <!--<li class="active"><span>1</span></li>-->
+                        <!--<li><a href="#1">2</a></li>-->
+                        <!--<li><a href="#1">3</a></li>-->
+                        <!--<li><a href="#1">4</a></li>-->
+                        <!--<li><a href="#1">5</a></li>-->
+                        <!--<li><a href="#1">6</a></li>-->
+                        <!--<li><a href="#1">7</a></li>-->
+                        <!--<li><a href="#1">8</a></li>-->
+                        <!--<li class="disabled"><span>...</span></li>-->
+                        <!--<li><a href="#!">14452</a></li>-->
+                        <!--<li><a href="#!">14453</a></li>-->
+                        <!--<li><a href="#!">»</a></li>-->
+                        <?php echo $page;?>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+</main>
+<!--End 页面主要内容-->
+</div>
+</div>
+
+<script type="text/javascript" src="__IMJS__/jquery.min.js"></script>
+<script type="text/javascript" src="__IMJS__/bootstrap.min.js"></script>
+<script type="text/javascript" src="__IMJS__/perfect-scrollbar.min.js"></script>
+<script type="text/javascript" src="__IMJS__/main.min.js"></script>
+<script type="text/javascript" src="__PLUGINS__/layui/layer/layer.js"></script>
+<script src="__IMJS__/jconfirm/jquery-confirm.min.js"></script>
+<script type="text/javascript" src="__PLUGINS__/layui/layui.all.js" charset="utf-8"></script>
+<script type="text/javascript" src="__PLUGINS__/common/iframe.js" charset="utf-8"></script>
+<script type="text/javascript">
+    $(function () {
+        $('.search-bar .dropdown-menu a').click(function () {
+            var field = $(this).data('field') || '';
+            $('#search-field').val(field);
+            $('#search-btn').html($(this).text() + ' <span class="caret"></span>');
+        });
+    });
+    //id=1的时候是批量禁用，等于2的时候是批量删除,3时启用
+    function del(){
+        var  check_val = [];
+        //开始循环获取input的值
+        $("input[name='idas']:checked").each(function(i){
+            check_val.push($(this).val());
+        });
+        //开始进行传值处理
+        layer.confirm('您确定要进此操作？', {
+            btn: ['我考虑清楚了','再想想'] //按钮
+        }, function(){
+            var url='/market/activity_del_batch';
+
+            $.ajax({
+                url:url,
+                dataType:'json',
+                type:'post',
+                data:{'id':check_val},
+                success:function(msg){
+                    var msgs=msg.msg;
+                    var json=msg.data;
+                    if(msgs==1){
+                        $(function(){
+                            layer.msg(json,{icon:"1",time:3000});
+                            setTimeout(function(){
+                                window.location.reload();
+                            },2000)
+                        });
+                    }else{
+                        $(function(){
+                            layer.msg(json,{icon:"2",time:3000});
+                            setTimeout(function(){
+                                window.location.reload();
+                            },2000)
+                        });
+                    }
+
+                },
+                error:function(){
+
+                    location.reload();
+                },
+            })
+        }, function(){
+
+        });
+
+    }
+</script>
+</body>
+</html>

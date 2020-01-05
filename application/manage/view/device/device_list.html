@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+{include file="common:header_iframe"}
+
+<div class="container-fluid p-t-15">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-toolbar clearfix">
+                    <form class="pull-right form-inline" method="get" action="/car/car_list" role="form">
+                        <div class="form-group">
+                        <label class="sr-only" for="example-if-password">IMEI</label>
+                        <input class="form-control" type="text"  name="IMEI" value="{$IMEI}" placeholder="请输入ImEI">
+                        </div>
+                        <div class="form-group">
+                            <label class="sr-only" for="example-if-password">车架号</label>
+                            <input class="form-control" type="text"  name="car_coding" value="{$car_coding}" placeholder="请输入车架号">
+                        </div>
+                        <div class="form-group">
+                            <label class="sr-only" for="example-if-password">车辆类型</label>
+                            <!--<input class="form-control" type="text"  name="type" value="" placeholder="请输入车辆类型">-->
+                            <select class="form-control" id="example-select" name="type" size="1">
+                                <option value="0">请选择</option>
+                                <option value="1" {if condition="$type eq 1"} selected {/if}>未租未断电</option>
+                                <option value="2" {if condition="$type eq 2"} selected {/if}>长时间未还</option>
+                                <option value="3" {if condition="$type eq 3"} selected {/if}>长时间未查看</option>
+                                <option value="4" {if condition="$type eq 4"} selected {/if}>长时间未使用</option>
+                                <option value="5" {if condition="$type eq 5"} selected {/if}>车辆故障</option>
+                                <option value="6" {if condition="$type eq 6"} selected {/if}>正常</option>
+                                <option value="7" {if condition="$type eq 7"} selected {/if}>上线</option>
+                                <option value="8" {if condition="$type eq 8"} selected {/if}>下线</option>
+                                <option value="9" {if condition="$type eq 9"} selected {/if}>服务区外</option>
+                                <option value="10" {if condition="$type eq 10"} selected {/if}>定位失败</option>
+                                <option value="11" {if condition="$type eq 11"} selected {/if}>未租未查</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="sr-only" for="example-if-password">类型</label>
+                            <!--<input class="form-control" type="text"  name="warn" value="" placeholder="请输入类型">-->
+                            <select class="form-control" id="" name="warn" size="1">
+                                <option value="0">请选择</option>
+                                <option value="1" {if condition="$warn eq 1"} selected {/if}>正常</option>
+                                <option value="2" {if condition="$warn eq 2"} selected {/if}>被盗</option>
+                            </select>
+                        </div>
+                         <div class="form-group">
+                            <label class="sr-only" for="example-if-password">出库</label>
+                            <!--<input class="form-control" type="text"  name="warn" value="" placeholder="请输入类型">-->
+                            <select class="form-control" id="" name="chuku" size="1">
+                                <option value="0">请选择</option>
+                                <option value="1,3" {if condition="$chuku eq  '1,3'"} selected {/if}>已出库</option>
+                                <option value="2" {if condition="$chuku eq 2"} selected {/if}>未出库</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                        <button class="btn btn-default" type="submit">搜索</button>
+                        </div>
+                    </form>
+                    <div class="toolbar-btn-action">
+                        <!--<a class="btn btn-primary m-r-5" href=""><i class="mdi mdi-plus"></i> 新增</a>-->
+                        <a type="button" onclick="layer_iframeadd('新增','/car/car_add',800,500)" class="btn btn-primary m-r-5"  title="" data-toggle="tooltip" data-original-title="新增"><i class="mdi mdi-plus"></i>新增</a>
+                        <a type="button" class="btn btn-primary m-r-5" onclick="send()" ><i class="mdi mdi-plus"></i>Excel导入</a>
+                        <form name="submit" id="submit">
+                             <input type="file" id="excel" name="excel" onchange="load()" style="display: none">
+                        </form>
+                        <!--<a class="btn btn-success m-r-5" href="#!" onclick="del(3,'','')"><i class="mdi mdi-check"></i> 同意</a>-->
+                        <!--<a class="btn btn-warning m-r-5" href="#!" onclick="del(4,'','')"><i class="mdi mdi-block-helper"></i> 拒绝</a>-->
+                        <!--<a class="btn btn-danger" href="#!" onclick="del()"><i class="mdi mdi-window-close"></i> 删除</a>-->
+                    </div>
+
+                </div>
+                <script>
+                    function send(){
+                        $("#excel").click();
+                    }
+                    function load(){
+                        var formData=new FormData($('#submit')[0]);
+                        console.log(formData);
+                        $.ajax({
+                            url: "/recharge/excel_add",
+                            type: 'POST',
+                            dataType:'json',
+                            cache:true,
+                            async:false,
+                            contentType:false,
+                            processData:false,
+                            data:formData,// $('#submit').serialize(),
+                            success:function( jsondata ){
+                                if (jsondata.status == 1) {
+                                    parent.layer.msg(jsondata.info,{icon:1,time:1000});
+                                    //window.location.href="{:url('admin/book/index')}";
+                                }else{
+                                    parent.layer.msg(jsondata.info,{icon:2,time:1000});
+                                }
+                                var index_new = parent.layer.getFrameIndex(window.name);
+                                //parent.layer.close(index_new);
+                            },
+                            error: function(data){
+                            }
+                        });
+                    }
+                </script>
+                <div class="card-body">
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>编号</th>
+                                <th>车子图片</th>
+                                <th >IMEI号码</th>
+                                <th>流量卡编号</th>
+                                <!--<th>车辆编码</th>-->
+                                <th>沉淀时长</th>
+                                <th>车架编号</th>
+                                <th>状态</th>
+                                <th>具体位置</th>
+                                <th>车子状态</th>
+                                <th>上下线</th>
+                                <th>是否断电</th>
+                                <th>是否被盗</th>
+                                <th>操作</th>
+                                <th>远程控制电动车</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {foreach $list as $k=>$v}
+                            <tr>
+
+                                <td>{$k+1}</td>
+                                <td><img src="/uploads/{$v['img']}" style="width: 80px;height: 80px"></td>
+                                <td >{$v['IMEI']}</td>
+
+                                <td>{$v['iccid']}</td>
+                              
+                                <!--<td>{$v['car_model']}</td>-->
+                                <td>{$v['precipitation_time']}</td>
+                                  <td>{$v['car_coding']}</td>
+                                <td>{if condition="$v['type'] eq 0"}未租未锁  {elseif condition="$v['type'] eq 1" }未租未断电  {elseif condition="$v['type'] eq 2" }长时间未还  {elseif condition="$v['type'] eq 3" } 长时间未查看 {elseif condition="$v['type'] eq 4" } 长时间未使用 {elseif condition="$v['type'] eq 5" } 正常 {elseif condition="$v['type'] eq 6" } 车辆故障  {elseif condition="$v['type'] eq 7" } 上线 {elseif condition="$v['type'] eq 8" } 下线  {elseif condition="$v['type'] eq 9" } 服务区外 {elseif condition="$v['type'] eq 10" } 定位失败{elseif condition="$v['type'] eq 11" }未租未查 {/if}</td>
+
+                                <td>{$v['address']}</td>
+                                <td>{if condition="$v['warn'] eq 1"} 正常 {else/} 异常 {/if}</td>
+                                <td>{if condition="$v['is_login'] eq 1"} 上线 {elseif condition="$v['is_login'] eq 2"} 未出库 {else/} 已出库未上线 {/if}</td>
+                                <td>{if condition="$v['is_electricity'] eq 1"} 正常 {else/} 断电 {/if}</td>
+                                <td>{if condition="$v['warn'] eq 1"} 正常 {else/} 被盗 {/if}</td>
+                                <td>
+                                    <div class="example-icons">
+                                        <a href="/finance/car_info/id/{$v['car_id']}"  class="role-edit btn btn-xs btn-default m-r-5" title="" data-toggle="tooltip" data-original-title="查看详情"><i class="mdi mdi-message"></i></a>
+
+                                    {if condition="$v['is_login'] eq 1"}
+
+                                        <a type="button" onclick="return confirm('确定要下线吗?','/car/car_online_no/id/',{$v['car_id']})" class="role-add btn btn-xs btn-default m-r-5" title="" data-toggle="tooltip" data-original-title="下线"><i class="mdi mdi-lock-open-outline"></i></a>
+                                    {else/}
+
+                                        <a type="button" onclick="return confirm('确定要上线吗?','/car/car_online/id/',{$v['car_id']})" class="role-add btn btn-xs btn-default m-r-5" title="" data-toggle="tooltip" data-original-title="上线"><i class="mdi mdi-lock"></i></a>
+
+                                    {/if}
+                                        <a type="button" onclick="return confirm('确定要删除吗','/car/car_del/id/',{$v['car_id']})" class="role-delete btn btn-xs btn-default" title="" data-toggle="tooltip" data-original-title="删除"><i class="mdi mdi-delete"></i></a>
+                                        
+                                          <a type="button" onclick="layer_iframe('车子订单列表','/car/car_order_list/id/',1000,800,{$v['car_id']})" class="role-delete btn btn-xs btn-default" title="" data-toggle="tooltip" data-original-title="车子订单列表"><i class="mdi mdi-border-all"></i></a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="example-icons">
+                                        <a type="button" onclick="return confirm('确定要开锁吗?','/car/car_start/id/',{$v['car_id']})" class="role-add btn btn-xs btn-default m-r-5" title="" data-toggle="tooltip" data-original-title="开锁骑行"><i class="mdi mdi-motorbike"></i></a>
+
+                                        <a type="button" onclick="return confirm('确定要关锁吗?','/car/endCar/id/',{$v['car_id']})" class="role-add btn btn-xs btn-default m-r-5" title="" data-toggle="tooltip" data-original-title="锁车驻停"><i class="mdi mdi-pandora"></i></a>
+
+                                        <a type="button" onclick="return confirm('确定要鸣笛吗?','/car/carOpen/id/',{$v['car_id']})" class="role-add btn btn-xs btn-default m-r-5" title="" data-toggle="tooltip" data-original-title="鸣笛"><i class="mdi mdi-volume-high"></i></a>
+
+                                        <a type="button" onclick="return confirm('确定要开坐垫锁吗?','/car/speak/id/',{$v['car_id']})" class="role-add btn btn-xs btn-default m-r-5" title="" data-toggle="tooltip" data-original-title="坐垫锁"><i class="mdi mdi-seat-legroom-reduced"></i></a>
+                                    </div>
+                                </td>
+
+                            </tr>
+                            {/foreach}
+                            </tbody>
+                        </table>
+                    </div>
+                    <ul class="pagination">
+
+                        <?php echo $page;?>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+</main>
+<!--End 页面主要内容-->
+</div>
+</div>
+
+<script type="text/javascript" src="__IMJS__/jquery.min.js"></script>
+<script type="text/javascript" src="__IMJS__/bootstrap.min.js"></script>
+<script type="text/javascript" src="__IMJS__/perfect-scrollbar.min.js"></script>
+<script type="text/javascript" src="__IMJS__/main.min.js"></script>
+<script type="text/javascript" src="__PLUGINS__/layui/layer/layer.js"></script>
+<script src="__IMJS__/jconfirm/jquery-confirm.min.js"></script>
+<script type="text/javascript" src="__PLUGINS__/layui/layui.all.js" charset="utf-8"></script>
+<script type="text/javascript" src="__PLUGINS__/common/iframe.js" charset="utf-8"></script>
+<script type="text/javascript">
+    $(function () {
+        $('.search-bar .dropdown-menu a').click(function () {
+            var field = $(this).data('field') || '';
+            $('#search-field').val(field);
+            $('#search-btn').html($(this).text() + ' <span class="caret"></span>');
+        });
+    });
+
+</script>
+</body>
+</html>

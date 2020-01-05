@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+{include file="common:header_iframe"}
+
+<div class="container-fluid p-t-15">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header"><h4>用户详情</h4></div>
+                <div class="card-body">
+                    <form action="##" method="post" onsubmit="return false;">
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon" >用户昵称</span>
+                            <input type="text" class="form-control" disabled="disabled" value="{$list['nickname']}"
+                                   aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon " >用户姓名</span>
+                            <input type="text" class="form-control" disabled="disabled" value="{$list['name']}"
+                            >
+                        </div>
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon" >身份证号</span>
+                            <input type="text" class="form-control" disabled="disabled" value="{$list['id_card']}"
+                                   aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon " >性别  |  生日</span>
+                            <input type="text" class="form-control" disabled="disabled" value="{$list['sex']}  |  {$list['birthday']}"
+                            >
+                        </div>
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon " >手机号</span>
+                            <input type="text" class="form-control" disabled="disabled" value="{$list['phone']}"
+                            >
+                        </div>
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon" >余额</span>
+                            <input type="text" class="form-control" disabled="disabled" value="{$list['money']}"
+                                   aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon">押金金额</span>
+                            <input type="text" class="form-control" disabled="disabled" value="{$list['deposit']}"
+                                   aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon" >最近登录时间</span>
+                            <input type="text" class="form-control" disabled="disabled" value="{$list['login_time']|date='Y-m-d H:i'}"
+                            aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon " >注册时间</span>
+                            <input type="text" class="form-control" disabled="disabled" value="{$list['addtime']|date='Y-m-d H:i'}"
+                            >
+                        </div>
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon" >用户级别</span>
+                            <input type="text" class="form-control" disabled="disabled" value="{if condition="$list['is_service'] eq 1"}管理人员 {else}普通用户{/if}"
+                                   aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon">免费骑行</span>
+                            <input type="text" class="form-control" disabled="disabled" value="{$list['free_ride']}天"
+                                   aria-describedby="basic-addon1">
+                        </div>
+                       <?php if(!empty($parent)) { ?>
+
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon">卡期限</span>
+                            <input type="text" class="form-control" disabled="disabled" value="{$parent['start_time']|date='Y-m-d H:i'}至{$parent['end_time']|date='Y-m-d H:i'}"
+                                   aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon">是否过期</span>
+                            <input type="text" class="form-control" disabled="disabled" value="{if condition="$parent['is_expired'] eq 1"}过期 {else}不过期{/if}"
+                                   aria-describedby="basic-addon1">
+                        </div>
+
+                        <?php } ?>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script type="text/javascript" src="__IMJS__/jquery.min.js"></script>
+<script type="text/javascript" src="__IMJS__/bootstrap.min.js"></script>
+<script type="text/javascript" src="__IMJS__/main.min.js"></script>
+</body>
+</html>

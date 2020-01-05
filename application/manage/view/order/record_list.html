@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+{include file="common:header_iframe"}
+
+<div class="container-fluid p-t-15">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-toolbar clearfix">
+                    <form class="pull-right form-inline" method="get" action="/order/record_list" role="form">
+                        <div class="form-group">
+                            <label class="sr-only" for="example-if-password">用户名</label>
+                            <input class="form-control" type="text"  name="user_name"   value="" placeholder="请输入用户名">
+                        </div>
+                        <div class="form-group">
+                            <label class="sr-only" for="example-if-password">开始时间</label>
+                            <input class="form-control" type="text"  name="star_time" id="test1" value="{$star_time}" placeholder="开始时间">
+                        </div>
+                        <div class="form-group">
+                            <label class="sr-only" for="example-if-password">结束时间</label>
+                            <input class="form-control" type="text"  name="end_time" id="test2" value="{$end_time}" placeholder="结束时间">
+                        </div>
+                        <div class="form-group">
+                            <label class="sr-only" for="example-if-password">金额类型</label>
+                            <!--<input class="form-control" type="text"  name="type" value="" placeholder="请输入车辆类型">-->
+                            <select class="form-control" id="example-select" name="type" size="1">
+                                <option value="0">请选择</option>
+                                <option value="1" {if condition="$type eq 1"} selected {/if}>充值金额</option>
+                                <option value="2" {if condition="$type eq 2"} selected {/if}>折扣金额</option>
+                                <option value="3" {if condition="$type eq 3"} selected {/if}>赠送金额</option>
+                                <option value="4" {if condition="$type eq 4"} selected {/if}>实际充值金额</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-default" type="submit">搜索</button>
+                        </div>
+
+                    </form>
+                    <div class="toolbar-btn-action">
+                        <div class="input-group m-b-10 col-xs-9">
+                            <span class="input-group-addon" >{$arr_type[$type]}</span>
+                            <input type="text" class="form-control" style="width: 20%" disabled="disabled" value="{$sum}元"
+                                   aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>编号</th>
+                                <th>用户名称</th>
+                                <th>充值金额</th>
+                                <th>折扣金额</th>
+                                <th>赠送金额</th>
+                                <th>实际充值金额</th>
+                                <th>订单号</th>
+                                <th>充值时间</th>
+                                <th>是否删除</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {foreach $list as $k=>$v}
+                            <tr>
+
+                                <td>{$k+1}</td>
+                                <td>{$v['user_name']}</td>
+                                <td>{$v['price']}</td>
+                                <td>{$v['discount']}</td>
+
+                                <td>{$v['gift_money']}</td>
+
+
+                                <td>{$v['pay_price']}</td>
+                                <td>{$v['order_no']}</td>
+                                <td>{$v['time']|date='Y-m-d H:i'}</td>
+                                <td>{if condition="$v['is_delete'] eq 1"} 删除 {else/} 正常 {/if}</td>
+                                <td>
+                                    <div class="example-icons">
+                                        <a type="button" onclick="return confirm('确定要删除吗','/order/record_del/id/',{$v['id']})" class="role-delete btn btn-xs btn-default" title="" data-toggle="tooltip" data-original-title="删除"><i class="mdi mdi-delete"></i></a>
+                                    </div>
+                                </td>
+
+                            </tr>
+                            {/foreach}
+                            </tbody>
+                        </table>
+                    </div>
+                    <ul class="pagination">
+
+                        <?php echo $page;?>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+</main>
+<!--End 页面主要内容-->
+</div>
+</div>
+
+<script type="text/javascript" src="__IMJS__/jquery.min.js"></script>
+<script type="text/javascript" src="__IMJS__/bootstrap.min.js"></script>
+<script type="text/javascript" src="__IMJS__/perfect-scrollbar.min.js"></script>
+<script type="text/javascript" src="__IMJS__/main.min.js"></script>
+<script type="text/javascript" src="__PLUGINS__/layui/layer/layer.js"></script>
+<script src="__IMJS__/jconfirm/jquery-confirm.min.js"></script>
+<!--<script type="text/javascript" src="__PLUGINS__/layui/layui.all.js" charset="utf-8"></script>-->
+<script type="text/javascript" src="__PLUGINS__/common/iframe.js" charset="utf-8"></script>
+<script src="__PLUGINS__/layui/laydate/laydate.js"></script> <!-- 改成你的路径 -->
+<script type="text/javascript">
+    $(function () {
+        $('.search-bar .dropdown-menu a').click(function () {
+            var field = $(this).data('field') || '';
+            $('#search-field').val(field);
+            $('#search-btn').html($(this).text() + ' <span class="caret"></span>');
+        });
+    });
+    laydate.render({
+        elem: '#test1' //指定元素
+    });
+    laydate.render({
+        elem: '#test2' //指定元素
+    });
+</script>
+</body>
+</html>

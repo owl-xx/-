@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+{include file="common:header_iframe"}
+
+<div class="container-fluid p-t-15">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-toolbar clearfix">
+                    <form class="pull-right form-inline" method="get" action="" role="form">
+
+                    </form>
+                    <div class="toolbar-btn-action">
+                        <!--<a class="btn btn-primary m-r-5" href="/car/promotions_add"><i class="mdi mdi-plus"></i> 新增</a>-->
+                        <!--<a type="button" onclick="layer_iframeadd('新增','/car/promotions_add',800,500)" class="btn btn-primary m-r-5"  title="" data-toggle="tooltip" data-original-title="新增"><i class="mdi mdi-plus"></i>新增</a>-->
+                        <!--<a class="btn btn-success m-r-5" href="#!" onclick="del(3,'','')"><i class="mdi mdi-check"></i> 同意</a>-->
+                        <!--<a class="btn btn-warning m-r-5" href="#!" onclick="del(4,'','')"><i class="mdi mdi-block-helper"></i> 拒绝</a>-->
+                        <!--<a class="btn btn-danger" href="#!" onclick="del()"><i class="mdi mdi-window-close"></i> 删除</a>-->
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>编号</th>
+                                <th>流量卡编号</th>
+                                <th>IMEI号码</th>
+                                <th>软件版本号</th>
+                                <th>硬件版本号</th>
+                                <th>地点</th>
+                                <th>用户名</th>
+                                <th>商家名称</th>
+                                <th>开始骑行时间</th>
+                                <th>结束骑行时间</th>
+                                <th>订单号</th>
+                                <th>未支付金额</th>
+                                <th>未归还的原因</th>
+                                <th>换车失败地点</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {foreach $list as $k=>$v}
+                            <tr>
+                                <td>{$k+1}</td>
+                                <td>{$v['iccid']}</td>
+                                <td>{$v['IMEI']}</td>
+                                <td>{$v['sver']}</td>
+                                <td>{$v['hver']}</td>
+                                <td>{$v['city']}</td>
+                                <td>{$v['user_name']}</td>
+                                <td>{$v['store_name']}</td>
+                                <td>{$v['start_time']|date='Y-m-d H:i'}</td>
+                                <td>{$v['end_time']|date='Y-m-d H:i'}</td>
+                                <td>{$v['order_no']}</td>
+                                <td>{$v['money']}</td>
+                                <td><?php echo $v['failure_info'];?></td>
+                                <td><?php echo getRealyAddress($v['locak_location']);?></td>
+                                <td>
+                                    <div class="example-icons">
+                                        <a href="/finance/car_info/id/{$v['car_id']}"  class="role-edit btn btn-xs btn-default m-r-5" title="" data-toggle="tooltip" data-original-title="查看车辆详情"><i class="mdi mdi-message"></i></a>
+
+                                        <a type="button" onclick="return confirm('确定要删除当前数据吗','/car/car_failure_del/id/',{$v['id']})" class="role-delete btn btn-xs btn-default" title="" data-toggle="tooltip" data-original-title="删除当前数据"><i class="mdi mdi-delete"></i></a>
+                                    </div>
+                                </td>
+
+                            </tr>
+                            {/foreach}
+                            </tbody>
+                        </table>
+                    </div>
+                    <ul class="pagination">
+
+                        <?php echo $page;?>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+</main>
+<!--End 页面主要内容-->
+</div>
+</div>
+
+<script type="text/javascript" src="__IMJS__/jquery.min.js"></script>
+<script type="text/javascript" src="__IMJS__/bootstrap.min.js"></script>
+<script type="text/javascript" src="__IMJS__/perfect-scrollbar.min.js"></script>
+<script type="text/javascript" src="__IMJS__/main.min.js"></script>
+<script type="text/javascript" src="__PLUGINS__/layui/layer/layer.js"></script>
+<script src="__IMJS__/jconfirm/jquery-confirm.min.js"></script>
+<script type="text/javascript" src="__PLUGINS__/layui/layui.all.js" charset="utf-8"></script>
+<script type="text/javascript" src="__PLUGINS__/common/iframe.js" charset="utf-8"></script>
+<script type="text/javascript">
+    $(function () {
+        $('.search-bar .dropdown-menu a').click(function () {
+            var field = $(this).data('field') || '';
+            $('#search-field').val(field);
+            $('#search-btn').html($(this).text() + ' <span class="caret"></span>');
+        });
+    });
+</script>
+</body>
+</html>

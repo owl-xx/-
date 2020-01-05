@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+{include file="common:header_iframe"}
+
+<div class="container-fluid p-t-15">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+
+                    <form action="/recharge/card_add_batch" method="post" class="row">
+
+                        <!--手机号-->
+                        <div class="form-group col-md-12">
+                            <label for="title">价格</label>
+                            <input type="text" class="form-control" id="title1" name="money"
+                                   value="" placeholder="请输入价格" onkeyup="num(this)" />
+                        </div>
+                        <!--手机号end-->
+                        <!--用户昵称-->
+                        <div class="form-group col-md-12">
+                            <label for="title">折扣金额</label>
+                            <input type="text" class="form-control" id="title2" name="discount_money"
+                                   value="" placeholder="请输入减免金额" onkeyup="num(this)" />
+                        </div>
+                         <div class="form-group col-md-12">
+                            <label for="title">赠送次数</label>
+                            <input type="text" class="form-control" id="title2" name="sum"
+                                   value="" placeholder="请输入赠送次数" onkeyup="num(this)" />
+                        </div>
+
+                        <!--<div class="form-group col-md-12">-->
+                            <!--<label for="title">赠送金额</label>-->
+                            <!--<input type="text" class="form-control" id="title3" name="gift_money"-->
+                                   <!--value="" placeholder="请输入赠送金额" onkeyup="num(this)" />-->
+                        <!--</div>-->
+
+                        <!--<div class="form-group col-md-12">-->
+                            <!--<label for="title">打几折</label>-->
+                            <!--<input type="text" class="form-control" id="title4" name="discount"-->
+                                   <!--value="" placeholder="请输入折数" onkeyup="num(this)" oninput="if(value>10)value=10;if(value<0)value=0"/>-->
+                        <!--</div>-->
+
+                        <!--<div class="form-group col-md-12">-->
+                        <!--<label for="title">结束时间</label>-->
+                        <!--<input type="text" class="form-control" id="time2" name="end_time"-->
+                        <!--value="" placeholder="请输入结束时间" />-->
+                        <!--</div>-->
+
+                        <div class="form-group col-md-12">
+                        <label for="type">免押金时间</label>
+                        <div class="form-controls">
+                        <select name="card_type" class="form-control" id="type">
+                        <option value="1">7天</option>
+                        <option value="2">30天</option>
+                         <option value="3">365天</option>
+                        </select>
+                        </div>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <button type="submit" class="btn btn-primary ajax-post" target-form="add-form">确 定</button>
+                            <!--<button type="button" class="btn btn-default"-->
+                            <!--onclick="javascript:history.back(-1);return false;">返 回-->
+                            <!--</button>-->
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+</main>
+<!--End 页面主要内容-->
+</div>
+</div>
+
+<script type="text/javascript" src="__IMJS__/jquery.min.js"></script>
+<script type="text/javascript" src="__IMJS__/bootstrap.min.js"></script>
+<script type="text/javascript" src="__IMJS__/perfect-scrollbar.min.js"></script>
+<!--标签插件-->
+<script src="__IMJS__/jquery-tags-input/jquery.tagsinput.min.js"></script>
+<script type="text/javascript" src="__IMJS__/main.min.js"></script>
+
+<!--时间选择插件-->
+<script src="__IMJS__/bootstrap-datetimepicker/moment.min.js"></script>
+<script src="__IMJS__/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
+<script src="__IMJS__/bootstrap-datetimepicker/locale/zh-cn.js"></script>
+<!--日期选择插件-->
+<script src="__IMJS__/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+<script src="__IMJS__/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js"></script>
+<script type="text/javascript" src="__IMJS__/main.min.js"></script>
+</body>
+<script type="text/javascript" src="__PLUGINS__/layui/laydate/laydate.js"></script> <!-- 改成你的路径 -->
+<script type="text/javascript">
+    laydate.render({
+        elem: '#time1' //指定元素
+    });
+    laydate.render({
+        elem: '#time2' //指定元素
+    });
+</script>
+<script>
+    function num(obj) {
+        obj.value = obj.value.replace(/[^\d.]/g, ""); //清除"数字"和"."以外的字符
+        obj.value = obj.value.replace(/^\./g, ""); //验证第一个字符是数字
+        obj.value = obj.value.replace(/\.{2,}/g, "."); //只保留第一个, 清除多余的
+        obj.value = obj.value.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+        obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3'); //只能输入两个小数
+    }
+</script>
+
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+{include file="common:header_iframe"}
+
+<div class="container-fluid p-t-15">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-toolbar clearfix">
+                    <form class="pull-right form-inline" method="get" action="" role="form">
+
+                    </form>
+                    <div class="toolbar-btn-action">
+                        <!--<a class="btn btn-primary m-r-5" href="/car/promotions_add"><i class="mdi mdi-plus"></i> 新增</a>-->
+                        <!--<a type="button" onclick="layer_iframeadd('新增','/car/promotions_add',800,500)" class="btn btn-primary m-r-5"  title="" data-toggle="tooltip" data-original-title="新增"><i class="mdi mdi-plus"></i>新增</a>-->
+                        <!--<a class="btn btn-success m-r-5" href="#!" onclick="del(3,'','')"><i class="mdi mdi-check"></i> 同意</a>-->
+                        <!--<a class="btn btn-warning m-r-5" href="#!" onclick="del(4,'','')"><i class="mdi mdi-block-helper"></i> 拒绝</a>-->
+                        <!--<a class="btn btn-danger" href="#!" onclick="del()"><i class="mdi mdi-window-close"></i> 删除</a>-->
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>编号</th>
+                                <th>车子图片</th>
+                                <th>车辆编码</th>
+                                <th>流量卡编号</th>
+                                <th>IMEI号码</th>
+                                <th>状态</th>
+                                <th>具体位置</th>
+                                <th>车子状态</th>
+                                <th>上下线</th>
+                                <th>是否断电</th>
+                                <th>是否被盗</th>
+                                <th>商家名称</th>
+                                <th>超出骑行范围</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {foreach $list as $k=>$v}
+                            <tr>
+                                <td>{$k+1}</td>
+                                <td><img src="{$v['img']}" style="width: 100px;height: 100px"></td>
+                                <td>{$v['car_coding']}</td>
+                                <td>{$v['iccid']}</td>
+                                <td>{$v['IMEI']}</td>
+
+                                <td>{if condition="$v['type'] eq 0"}未租未锁  {elseif condition="$v['type'] eq 1" }未租未断电  {elseif condition="$v['type'] eq 2" }长时间未还  {elseif condition="$v['type'] eq 3" } 长时间未查看 {elseif condition="$v['type'] eq 4" } 长时间未使用 {elseif condition="$v['type'] eq 5" } 正常 {elseif condition="$v['type'] eq 6" } 车辆故障  {elseif condition="$v['type'] eq 7" } 上线 {elseif condition="$v['type'] eq 8" } 下线  {elseif condition="$v['type'] eq 9" } 服务区外 {elseif condition="$v['type'] eq 10" } 定位失败{elseif condition="$v['type'] eq 11" }未租未查 {/if}</td>
+
+
+                                <td>{$v['address']}</td>
+                                <td>{if condition="$v['warn'] eq 1"} 正常 {else/} 异常 {/if}</td>
+                                <td>{if condition="$v['is_login'] eq 1"} 上线 {else/} 未上线 {/if}</td>
+                                <td>{if condition="$v['is_electricity'] eq 1"} 正常 {else/} 断电 {/if}</td>
+                                <td>{if condition="$v['warn'] eq 1"} 正常 {else/} 被盗 {/if}</td>
+                                <td>{$v['store_name']}</td>
+                                <td>超出骑行范围</td>
+                                <td>
+                                    <div class="example-icons">
+                                        <a href="/finance/car_info/id/{$v['car_id']}"  class="role-edit btn btn-xs btn-default m-r-5" title="" data-toggle="tooltip" data-original-title="查看详情"><i class="mdi mdi-message"></i></a>
+
+                                        <a type="button" onclick="return confirm('确定要删除吗','/car/car_del/id/',{$v['car_id']})" class="role-delete btn btn-xs btn-default" title="" data-toggle="tooltip" data-original-title="删除"><i class="mdi mdi-delete"></i></a>
+                                    </div>
+                                </td>
+
+                            </tr>
+                            {/foreach}
+                            </tbody>
+                        </table>
+                    </div>
+                    <ul class="pagination">
+
+                        <?php echo $page;?>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+</main>
+<!--End 页面主要内容-->
+</div>
+</div>
+
+<script type="text/javascript" src="__IMJS__/jquery.min.js"></script>
+<script type="text/javascript" src="__IMJS__/bootstrap.min.js"></script>
+<script type="text/javascript" src="__IMJS__/perfect-scrollbar.min.js"></script>
+<script type="text/javascript" src="__IMJS__/main.min.js"></script>
+<script type="text/javascript" src="__PLUGINS__/layui/layer/layer.js"></script>
+<script src="__IMJS__/jconfirm/jquery-confirm.min.js"></script>
+<script type="text/javascript" src="__PLUGINS__/layui/layui.all.js" charset="utf-8"></script>
+<script type="text/javascript" src="__PLUGINS__/common/iframe.js" charset="utf-8"></script>
+<script type="text/javascript">
+    $(function () {
+        $('.search-bar .dropdown-menu a').click(function () {
+            var field = $(this).data('field') || '';
+            $('#search-field').val(field);
+            $('#search-btn').html($(this).text() + ' <span class="caret"></span>');
+        });
+    });
+</script>
+</body>
+</html>
